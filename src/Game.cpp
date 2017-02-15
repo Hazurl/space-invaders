@@ -9,7 +9,7 @@ Game::Game(sf::RenderWindow & window) {
     this->state = State::MENU;
 
     //Texture / Image
-    if (!this->tx_title.loadFromFile("title.bmp", sf::IntRect(0, 0, 246, 178))) {
+    if (!this->tx_title.loadFromFile("img/title.bmp", sf::IntRect(0, 0, 246, 178))) {
         std::cerr << "Impossible d'ouvrir la texture de titre" << std::endl;
         exit(1);
     }
