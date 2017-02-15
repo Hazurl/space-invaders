@@ -4,6 +4,8 @@
 
 Game::Game(sf::RenderWindow & window) {
     this->window = &window;
+
+    this->state = State::MENU;
 }
 
 Game::~Game () {
@@ -24,8 +26,9 @@ void Game::initialize () {
 }
 
 void Game::update() {
-    for (int i = this->invaders.size() -1; i >= 0; --i) {
-        this->invaders.at(i)->update(this->invadersSpeed);
+    if (this->state == State::PLAYING) {
+        for (int i = this->invaders.size() -1; i >= 0; --i)
+            this->invaders.at(i)->update(this->invadersSpeed);
     }
 }
 
@@ -34,5 +37,5 @@ void Game::onEvent(sf::Event::EventType const& type, sf::Event const& event) {
 }
 
 void Game::draw () {
-    
+
 }

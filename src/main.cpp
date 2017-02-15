@@ -15,7 +15,6 @@ int main()
     window.setVerticalSyncEnabled(false);
 
     Game game(window);
-    game.initialize();
 
     while (window.isOpen()) {
         sf::Event event;
