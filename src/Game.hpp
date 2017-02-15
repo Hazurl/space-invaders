@@ -5,6 +5,8 @@
 #include <vector>
 #include "SpaceShip.hpp"
 
+enum class State { PAUSE, PLAYING, MENU };
+
 class Game {
 public :
     Game(sf::RenderWindow & window);
@@ -25,6 +27,8 @@ private :
 
     SpaceShip* player;
     std::vector<SpaceShip* > invaders;
+
+    State state;
 };
 
 #endif

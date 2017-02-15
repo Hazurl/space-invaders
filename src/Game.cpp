@@ -34,5 +34,5 @@ void Game::onEvent(sf::Event::EventType const& type, sf::Event const& event) {
 }
 
 void Game::draw () {
-
+    
 }
