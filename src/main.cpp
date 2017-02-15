@@ -3,21 +3,32 @@
  */
 
 #include <SFML/Graphics.hpp>
+#include "Game.hpp"
+
+#define HEIGHT 900
+#define WIDTH 450
 
 int main()
 {
-    sf::RenderWindow window(sf::VideoMode(800, 450), "Space Invaders", sf::Style::Close | sf::Style::Titlebar);
+    sf::RenderWindow window (sf::VideoMode(HEIGHT, WIDTH), "Space Invaders", sf::Style::Close | sf::Style::Titlebar);
+    window.setFramerateLimit(120);
+    window.setVerticalSyncEnabled(false);
 
-    while (window.isOpen())
-    {
+    Game game(window);
+    game.initialize();
+
+    while (window.isOpen()) {
         sf::Event event;
-        while (window.pollEvent(event))
-        {
+        while (window.pollEvent(event)) {
+            game.onEvent(event.type, event);
+
             if (event.type == sf::Event::Closed)
                 window.close();
         }
 
         window.clear();
+
+        game.draw();
 
         window.display();
     }
