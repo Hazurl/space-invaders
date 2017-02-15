@@ -1,5 +1,5 @@
 /* Build
- * g++ -std=c++17 -W -c src/main.cpp -o build/main.o && g++ build/main.o -o space-invaders -lsfml-graphics -lsfml-window -lsfml-system && ./space-invaders 
+ * g++ -std=c++17 -W -c src/SpaceShip.cpp src/main.cpp -o build/main.o && g++ build/main.o -o space-invaders -lsfml-graphics -lsfml-window -lsfml-system && ./space-invaders 
  */
 
 #include <SFML/Graphics.hpp>
@@ -25,6 +25,8 @@ int main()
             if (event.type == sf::Event::Closed)
                 window.close();
         }
+
+        game.update();
 
         window.clear();
 
