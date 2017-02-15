@@ -29,6 +29,10 @@ private :
     std::vector<SpaceShip* > invaders;
 
     State state;
+
+    // Texture / Image
+    sf::Texture tx_title;
+    sf::Sprite title;
 };
 
 #endif
