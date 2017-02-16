@@ -9,7 +9,7 @@ enum class State { PAUSE, PLAYING, MENU };
 
 class Game {
 public :
-    Game(sf::RenderWindow & window);
+    Game(sf::RenderWindow & window, unsigned int width, unsigned int height);
     ~Game();
 
     void initialize();
@@ -19,6 +19,8 @@ public :
 
 private :
     sf::RenderWindow* window;
+    float width;
+    float height;
 
     unsigned int score;
     unsigned int life;

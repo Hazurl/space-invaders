@@ -3,10 +3,14 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 
-Game::Game(sf::RenderWindow & window) {
+Game::Game(sf::RenderWindow & window, unsigned int width, unsigned int height) {
     this->window = &window;
+    this->height = height;
+    this->width = width;
 
     this->state = State::MENU;
+
+    this->player = nullptr;
 
     //Texture / Image
     if (!this->tx_title.loadFromFile("img/title.bmp", sf::IntRect(0, 0, 246, 178))) {
@@ -15,11 +19,13 @@ Game::Game(sf::RenderWindow & window) {
     }
 
     this->title.setTexture(tx_title);
+    this->title.setPosition(this->width / 2 - this->title.getTextureRect().width / 2,
+                            this->height / 2 - this->title.getTextureRect().height / 2);
 }
 
 Game::~Game () {
     if (this->player)
-        delete player;
+        delete this->player;
 
     while (!this->invaders.empty()) {
         delete this->invaders.back();
