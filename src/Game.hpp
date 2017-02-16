@@ -32,7 +32,12 @@ private :
 
     State state;
 
+    // Font
+    sf::Font main_font; 
+ 
     // Texture / Image
+
+        // TITRE
     sf::Texture tx_title;
     sf::Sprite title;
 };
