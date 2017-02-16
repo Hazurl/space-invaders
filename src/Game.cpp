@@ -26,7 +26,7 @@ Game::Game(sf::RenderWindow & window, unsigned int width, unsigned int height) {
 
     this->title.setTexture(tx_title);
     this->title.setPosition(this->width / 2 - this->title.getTextureRect().width / 2,
-                            this->height / 2 - this->title.getTextureRect().height / 2);
+                            this->height * 0.2);
 } 
 
 Game::~Game () {
@@ -73,6 +73,12 @@ void Game::draw () {
             press_space_text.setString("Press SPACE to start");
             press_space_text.setCharacterSize(32);
             press_space_text.setColor(sf::Color::White);
+
+            float w = press_space_text.getGlobalBounds().width;
+            float h = press_space_text.getGlobalBounds().height;
+
+            press_space_text.setPosition(this->width / 2 - w / 2,
+                                         this->height * 0.7);
 
             this->window->draw(press_space_text);
         break; 
