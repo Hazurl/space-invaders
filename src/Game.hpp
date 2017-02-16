@@ -16,6 +16,7 @@ public :
     void update();
     void onEvent(sf::Event::EventType const& type, sf::Event const& event);
     void draw();
+    void setState(State st);
 
 private :
     sf::RenderWindow* window;

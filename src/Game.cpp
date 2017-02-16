@@ -44,6 +44,13 @@ void Game::initialize () {
     this->life = 3;
 
     this->player = new SpaceShip();
+    for (int i = 0; i < 11; ++i) {
+        this->invaders.push_back(new SpaceShip()); // rangé du fond
+        this->invaders.push_back(new SpaceShip()); // rangé du milieu
+        this->invaders.push_back(new SpaceShip()); // de meme
+        this->invaders.push_back(new SpaceShip()); // seconde rangé
+        this->invaders.push_back(new SpaceShip()); // première rangé
+    }
 }
 
 void Game::update() {
@@ -54,7 +61,20 @@ void Game::update() {
 }
 
 void Game::onEvent(sf::Event::EventType const& type, sf::Event const& event) {
+    switch (this->state) {
+        case State::PLAYING :
+        break;
 
+        case State::PAUSE :
+        break;
+
+        case State::MENU :
+            if (type == sf::Event::EventType::KeyReleased) {
+                if (event.key.code == sf::Keyboard::Space)
+                    this->setState(State::PLAYING);
+            }
+        break; 
+    }
 }
 
 void Game::draw () {
@@ -83,4 +103,15 @@ void Game::draw () {
             this->window->draw(press_space_text);
         break; 
     }
+}
+
+void Game::setState(State st) {
+    if (this->state == st)
+        return;
+
+    if (st == State::PLAYING) {
+        this->state = st;
+        this->initialize();
+    }
+    //std::cout << "Changement d'état en " << (st == State::PAUSE ? "Pause" : st == State::PLAYING ? "Playing" : "Menu") << std::endl;
 }
