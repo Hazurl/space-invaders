@@ -1,21 +1,15 @@
-/* Build
- * g++ -std=c++17 -W -c src/SpaceShip.cpp src/main.cpp -o build/main.o && g++ build/main.o -o space-invaders -lsfml-graphics -lsfml-window -lsfml-system && ./space-invaders 
- */
-
 #include <SFML/Graphics.hpp>
 #include "Game.hpp"
 
-#define HEIGHT 900
-#define WIDTH 450
+#define WIDTH 800
+#define HEIGHT 450
 
 int main()
 {
-    sf::RenderWindow window (sf::VideoMode(HEIGHT, WIDTH), "Space Invaders", sf::Style::Close | sf::Style::Titlebar);
+    sf::RenderWindow window (sf::VideoMode(WIDTH, HEIGHT), "Space Invaders", sf::Style::Close | sf::Style::Titlebar);
     window.setFramerateLimit(120);
-    window.setVerticalSyncEnabled(false);
 
-    Game game(window);
-    game.initialize();
+    Game game(window, WIDTH, HEIGHT);
 
     while (window.isOpen()) {
         sf::Event event;
