@@ -1,6 +1,5 @@
-#include "Game.hpp"
-#include "SpaceShip.hpp"
-#include <SFML/Graphics.hpp>
+#include "Game.h"
+
 #include <iostream>
 
 Game::Game(sf::RenderWindow & window, unsigned int width, unsigned int height) {
@@ -43,13 +42,13 @@ void Game::initialize () {
     this->score = 0;
     this->life = 3;
 
-    this->player = new SpaceShip();
+    this->player = new SpaceShip("img/player_0.bmp", this->width / 2, this->height - 50);
     for (int i = 0; i < 11; ++i) {
-        this->invaders.push_back(new SpaceShip()); // rangé du fond
-        this->invaders.push_back(new SpaceShip()); // rangé du milieu
-        this->invaders.push_back(new SpaceShip()); // de meme
-        this->invaders.push_back(new SpaceShip()); // seconde rangé
-        this->invaders.push_back(new SpaceShip()); // première rangé
+        this->invaders.push_back(new SpaceShip("img/inv_a.bmp", 4, 7, 36, 7, 10, this->width * i / 14)); // rangé du fond
+        this->invaders.push_back(new SpaceShip("img/inv_b.bmp", 4, 7, 36, 7,60, this->width * i / 14)); // rangé du milieu
+        this->invaders.push_back(new SpaceShip("img/inv_b.bmp", 4, 7, 36, 7,110, this->width * i / 14)); // de meme
+        this->invaders.push_back(new SpaceShip("img/inv_c.bmp", 4, 7, 36, 7,160, this->width * i / 14)); // seconde rangé
+        this->invaders.push_back(new SpaceShip("img/inv_c.bmp", 4, 7, 36, 7,210, this->width * i / 14)); // première rangé
     }
 }
 
@@ -80,6 +79,9 @@ void Game::onEvent(sf::Event::EventType const& type, sf::Event const& event) {
 void Game::draw () {
     switch (this->state) {
         case State::PLAYING :
+            this->player->draw(this->window);
+            for (int i = this->invaders.size() -1; i >= 0; --i)
+                this->invaders.at(i)->draw(this->window);
         break;
 
         case State::PAUSE :
@@ -95,7 +97,6 @@ void Game::draw () {
             press_space_text.setColor(sf::Color::White);
 
             float w = press_space_text.getGlobalBounds().width;
-            float h = press_space_text.getGlobalBounds().height;
 
             press_space_text.setPosition(this->width / 2 - w / 2,
                                          this->height * 0.7);

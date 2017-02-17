@@ -1,11 +1,38 @@
-#include "SpaceShip.hpp"
+#include "SpaceShip.h"
 
-SpaceShip::SpaceShip () {
+#include <iostream>
 
+SpaceShip::SpaceShip (float x, float y) {
+    this->x = x;
+    this->y = y;
+}
+
+SpaceShip::SpaceShip (std::string const& tx_path, unsigned int width, unsigned int height, unsigned int first_x,
+                      unsigned int first_y, unsigned int second_x, unsigned int second_y, float x, float y) {
+    this->setSpriteFromFile(tx_path);
+    this->x = x;
+    this->y = y;
+
+    this->frame_0.x = first_x;
+    this->frame_0.y = first_y;
+    this->frame_1.x = second_x;
+    this->frame_1.y = second_y;
+
+    this->size.x = width;
+    this->size.y = height;
 }
 
 SpaceShip::~SpaceShip() {
 
+}
+
+void SpaceShip::setSpriteFromFile(std::string const& path) {
+    if (!this->tx.loadFromFile(path)) {
+        std::cerr << "Impossible d'ouvrir la texture : " << path << std::endl;
+        exit(1);
+    }
+
+    this->sp.setTexture(this->tx);
 }
 
 void SpaceShip::update(float speed) {
@@ -22,4 +49,11 @@ void SpaceShip::moveY(float amount) {
 
 void SpaceShip::invertX() {
     this->move_right = ! this->move_right;
+}
+
+void SpaceShip::draw (sf::RenderWindow* window) {
+    sf::IntRect rect(this->frame_0, this->size);
+    sp.setTextureRect(rect);
+    this->sp.setPosition(this->x, this->y);
+    window->draw(this->sp);
 }

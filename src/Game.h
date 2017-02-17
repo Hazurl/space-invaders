@@ -1,9 +1,10 @@
-#ifndef __GAME_HPP__
-#define __GAME_HPP__
+#ifndef __GAME_H__
+#define __GAME_H__
+
+#include "SpaceShip.h"
 
 #include <SFML/Graphics.hpp>
 #include <vector>
-#include "SpaceShip.hpp"
 
 enum class State { PAUSE, PLAYING, MENU };
 

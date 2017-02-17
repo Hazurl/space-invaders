@@ -1,5 +1,5 @@
 #include <SFML/Graphics.hpp>
-#include "Game.hpp"
+#include "Game.h"
 
 #define WIDTH 800
 #define HEIGHT 450
