@@ -31,7 +31,6 @@ $(BUILD_DIR):
 # Clean every build files by destroying the build/ folder.
 clean:
 	rm -rf build
-	find . -type f -name '*.d' -delete
 	@echo "----------------"
 	@echo "Project cleaned."
 	@echo "----------------"
