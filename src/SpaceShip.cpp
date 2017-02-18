@@ -16,7 +16,7 @@ SpaceShip::~SpaceShip() {
 }
 
 void SpaceShip::setSpriteFromFile(std::string const& path) {
-    this->sp.setTexture(*Loader::getTexture(path));
+    this->sp.setTexture(Loader::getTexture(path));
 }
 
 void SpaceShip::update(float speed) {

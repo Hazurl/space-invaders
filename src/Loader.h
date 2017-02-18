@@ -7,7 +7,7 @@
 
 class Loader {
 public :
-    static sf::Texture* getTexture(std::string path);
+    static sf::Texture& getTexture(std::string path);
     static void clean ();
 
 private :
