@@ -57,6 +57,18 @@ void Game::update() {
 void Game::onEvent(sf::Event::EventType const& type, sf::Event const& event) {
     switch (this->state) {
         case State::PLAYING :
+            if (type == sf::Event::EventType::KeyPressed) {
+                switch (event.key.code) {
+                    case sf::Keyboard::Key::Right :
+                        this->player->moveX(10);
+                    break;
+                    case sf::Keyboard::Key::Left :
+                        this->player->moveX(-10);
+                    break;
+
+                    default : break;
+                }
+            }
         break;
 
         case State::PAUSE :
