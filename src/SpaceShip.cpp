@@ -2,19 +2,13 @@
 
 #include <iostream>
 
-SpaceShip::SpaceShip (std::string const& tx_path, unsigned int width, unsigned int height, unsigned int first_x,
-                      unsigned int first_y, unsigned int second_x, unsigned int second_y, float x, float y) {
+SpaceShip::SpaceShip (std::string const& tx_path, unsigned int size, float x, float y) {
     this->setSpriteFromFile(tx_path);
     this->x = x;
     this->y = y;
 
-    this->frame_0.x = first_x;
-    this->frame_0.y = first_y;
-    this->frame_1.x = second_x;
-    this->frame_1.y = second_y;
-
-    this->size.x = width;
-    this->size.y = height;
+    this->size.x = size;
+    this->size.y = size;
 }
 
 SpaceShip::~SpaceShip() {
@@ -42,7 +36,8 @@ void SpaceShip::invertX() {
 }
 
 void SpaceShip::draw (sf::RenderWindow* window) {
-    sf::IntRect rect(this->frame_0, this->size);
+    sf::Vector2i rectPos(0, 0);
+    sf::IntRect rect(rectPos, this->size);
     sp.setTextureRect(rect);
     this->sp.setPosition(this->x, this->y);
     window->draw(this->sp);

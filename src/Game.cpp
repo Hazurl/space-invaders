@@ -37,13 +37,13 @@ void Game::initialize () {
     this->score = 0;
     this->life = 3;
 
-    this->player = new SpaceShip("img/player_0.bmp", 26, 22, 3, 7, 3, 7, this->width / 2, this->height - 50);
+    this->player = new SpaceShip("img/player_0.bmp", 32, this->width / 2, this->height - 50);
     for (int i = 0; i < 11; ++i) {
-        this->invaders.push_back(new SpaceShip("img/inv_a.bmp", 26, 22, 3, 7, 36, 7, this->width * i / 14, 10)); // rangé du fond
-        this->invaders.push_back(new SpaceShip("img/inv_b.bmp", 26, 22, 3, 7, 36, 7, this->width * i / 14, 60)); // rangé du milieu
-        this->invaders.push_back(new SpaceShip("img/inv_b.bmp", 26, 22, 3, 7, 36, 7, this->width * i / 14, 110)); // de meme
-        this->invaders.push_back(new SpaceShip("img/inv_c.bmp", 26, 22, 3, 7, 36, 7, this->width * i / 14, 160)); // seconde rangé
-        this->invaders.push_back(new SpaceShip("img/inv_c.bmp", 26, 22, 3, 7, 36, 7, this->width * i / 14, 210)); // première rangé
+        this->invaders.push_back(new SpaceShip("img/inv_a.bmp", 32, this->width * i / 14, 10)); // rangé du fond
+        this->invaders.push_back(new SpaceShip("img/inv_b.bmp", 32, this->width * i / 14, 60)); // rangé du milieu
+        this->invaders.push_back(new SpaceShip("img/inv_b.bmp", 32, this->width * i / 14, 110)); // de meme
+        this->invaders.push_back(new SpaceShip("img/inv_c.bmp", 32, this->width * i / 14, 160)); // seconde rangé
+        this->invaders.push_back(new SpaceShip("img/inv_c.bmp", 32, this->width * i / 14, 210)); // première rangé
     }
 }
 
