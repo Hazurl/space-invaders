@@ -51,9 +51,9 @@ void Game::update(Input input) {
     switch (this->state) {
         case State::PLAYING :
             if (input.isPressed(Input::Button::right))
-                this->player->moveX(10);
+                this->player->moveX(2);
             if (input.isPressed(Input::Button::left))
-                this->player->moveX(-10);
+                this->player->moveX(-2);
             for (int i = this->invaders.size() -1; i >= 0; --i)
                 this->invaders.at(i)->update(this->invadersSpeed);
         break;
