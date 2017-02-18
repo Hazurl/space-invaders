@@ -1,5 +1,7 @@
 #include <SFML/Graphics.hpp>
+
 #include "Game.h"
+#include "Loader.h"
 
 #define WIDTH 800
 #define HEIGHT 450
@@ -28,6 +30,8 @@ int main()
 
         window.display();
     }
+
+    Loader::clean();
 
     return 0;
 }

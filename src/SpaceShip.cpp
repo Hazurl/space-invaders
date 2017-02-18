@@ -2,16 +2,13 @@
 
 #include <iostream>
 
-SpaceShip::SpaceShip (float x, float y) {
-    this->x = x;
-    this->y = y;
-}
-
 SpaceShip::SpaceShip (std::string const& tx_path, unsigned int width, unsigned int height, unsigned int first_x,
                       unsigned int first_y, unsigned int second_x, unsigned int second_y, float x, float y) {
     this->setSpriteFromFile(tx_path);
     this->x = x;
     this->y = y;
+
+    //std::cout << '(' << this->x << ", " << this->y << ")" << std::endl;
 
     this->frame_0.x = first_x;
     this->frame_0.y = first_y;
@@ -27,12 +24,7 @@ SpaceShip::~SpaceShip() {
 }
 
 void SpaceShip::setSpriteFromFile(std::string const& path) {
-    if (!this->tx.loadFromFile(path)) {
-        std::cerr << "Impossible d'ouvrir la texture : " << path << std::endl;
-        exit(1);
-    }
-
-    this->sp.setTexture(this->tx);
+    this->sp.setTexture(*Loader::getTexture(path));
 }
 
 void SpaceShip::update(float speed) {

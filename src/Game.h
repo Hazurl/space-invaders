@@ -2,6 +2,7 @@
 #define __GAME_H__
 
 #include "SpaceShip.h"
+#include "Loader.h"
 
 #include <SFML/Graphics.hpp>
 #include <vector>
@@ -37,10 +38,9 @@ private :
     // Font
     sf::Font main_font; 
  
-    // Texture / Image
+    // Sprite
 
         // TITRE
-    sf::Texture tx_title;
     sf::Sprite title;
 };
 

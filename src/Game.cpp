@@ -17,13 +17,8 @@ Game::Game(sf::RenderWindow & window, unsigned int width, unsigned int height) {
         exit(1);
     }
 
-    // Texture / Image
-    if (!this->tx_title.loadFromFile("img/title.bmp", sf::IntRect(0, 0, 246, 178))) {
-        std::cerr << "Impossible d'ouvrir la texture de titre" << std::endl;
-        exit(1);
-    }
-
-    this->title.setTexture(tx_title);
+    // Sprite
+    this->title.setTexture(*Loader::getTexture("img/title.bmp"));
     this->title.setPosition(this->width / 2 - this->title.getTextureRect().width / 2,
                             this->height * 0.2);
 } 
@@ -42,13 +37,13 @@ void Game::initialize () {
     this->score = 0;
     this->life = 3;
 
-    this->player = new SpaceShip("img/player_0.bmp", this->width / 2, this->height - 50);
+    this->player = new SpaceShip("img/player_0.bmp", 26, 22, 3, 7, 3, 7, this->width / 2, this->height - 50);
     for (int i = 0; i < 11; ++i) {
-        this->invaders.push_back(new SpaceShip("img/inv_a.bmp", 4, 7, 36, 7, 10, this->width * i / 14)); // rangé du fond
-        this->invaders.push_back(new SpaceShip("img/inv_b.bmp", 4, 7, 36, 7,60, this->width * i / 14)); // rangé du milieu
-        this->invaders.push_back(new SpaceShip("img/inv_b.bmp", 4, 7, 36, 7,110, this->width * i / 14)); // de meme
-        this->invaders.push_back(new SpaceShip("img/inv_c.bmp", 4, 7, 36, 7,160, this->width * i / 14)); // seconde rangé
-        this->invaders.push_back(new SpaceShip("img/inv_c.bmp", 4, 7, 36, 7,210, this->width * i / 14)); // première rangé
+        this->invaders.push_back(new SpaceShip("img/inv_a.bmp", 26, 22, 3, 7, 36, 7, this->width * i / 14, 10)); // rangé du fond
+        this->invaders.push_back(new SpaceShip("img/inv_b.bmp", 26, 22, 3, 7, 36, 7, this->width * i / 14, 60)); // rangé du milieu
+        this->invaders.push_back(new SpaceShip("img/inv_b.bmp", 26, 22, 3, 7, 36, 7, this->width * i / 14, 110)); // de meme
+        this->invaders.push_back(new SpaceShip("img/inv_c.bmp", 26, 22, 3, 7, 36, 7, this->width * i / 14, 160)); // seconde rangé
+        this->invaders.push_back(new SpaceShip("img/inv_c.bmp", 26, 22, 3, 7, 36, 7, this->width * i / 14, 210)); // première rangé
     }
 }
 
