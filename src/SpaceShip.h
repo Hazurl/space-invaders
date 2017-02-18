@@ -15,6 +15,7 @@ public :
     void moveX(float amount);
     void moveY(float amount);
     void invertX();
+    void setPosition (float x, float y);
 
     void setSpriteFromFile(std::string const& path);
 

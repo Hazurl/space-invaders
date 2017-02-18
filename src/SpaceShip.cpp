@@ -35,6 +35,12 @@ void SpaceShip::invertX() {
     this->move_right = ! this->move_right;
 }
 
+void SpaceShip::setPosition (float x, float y) {
+    this->x = x;
+    this->y = y;
+}
+
+
 void SpaceShip::draw (sf::RenderWindow* window) {
     sf::Vector2i rectPos(0, 0);
     sf::IntRect rect(rectPos, this->size);
