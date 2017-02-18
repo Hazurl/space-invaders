@@ -3,13 +3,15 @@
 
 #include <string>
 #include <map>
+#include <SFML/Graphics.hpp>
 
-static class Loader {
+class Loader {
 public :
-    static sf::Texture* getTexture(sdt::string path);
+    static sf::Texture* getTexture(std::string path);
+    static void clean ();
 
 private :
-    static std::map<string, sf::Texture* > texturesMap;
+    static std::map<std::string, sf::Texture* > texturesMap;
 };
 
 #endif
