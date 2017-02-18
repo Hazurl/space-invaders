@@ -2,6 +2,7 @@
 
 #include "Game.h"
 #include "Loader.h"
+#include "Input.h"
 
 #define WIDTH 800
 #define HEIGHT 450
@@ -12,17 +13,17 @@ int main()
     window.setFramerateLimit(120);
 
     Game game(window, WIDTH, HEIGHT);
+    Input input;
 
     while (window.isOpen()) {
         sf::Event event;
         while (window.pollEvent(event)) {
-            game.onEvent(event.type, event);
-
             if (event.type == sf::Event::Closed)
                 window.close();
         }
 
-        game.update();
+        input.updateButtons();
+        game.update(input);
 
         window.clear();
 

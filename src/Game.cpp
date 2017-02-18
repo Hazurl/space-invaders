@@ -47,38 +47,23 @@ void Game::initialize () {
     }
 }
 
-void Game::update() {
-    if (this->state == State::PLAYING) {
-        for (int i = this->invaders.size() -1; i >= 0; --i)
-            this->invaders.at(i)->update(this->invadersSpeed);
-    }
-}
-
-void Game::onEvent(sf::Event::EventType const& type, sf::Event const& event) {
+void Game::update(Input input) {
     switch (this->state) {
         case State::PLAYING :
-            if (type == sf::Event::EventType::KeyPressed) {
-                switch (event.key.code) {
-                    case sf::Keyboard::Key::Right :
-                        this->player->moveX(10);
-                    break;
-                    case sf::Keyboard::Key::Left :
-                        this->player->moveX(-10);
-                    break;
-
-                    default : break;
-                }
-            }
+            if (input.isPressed(Input::Button::right))
+                this->player->moveX(10);
+            if (input.isPressed(Input::Button::left))
+                this->player->moveX(-10);
+            for (int i = this->invaders.size() -1; i >= 0; --i)
+                this->invaders.at(i)->update(this->invadersSpeed);
         break;
 
         case State::PAUSE :
         break;
 
         case State::MENU :
-            if (type == sf::Event::EventType::KeyReleased) {
-                if (event.key.code == sf::Keyboard::Space)
-                    this->setState(State::PLAYING);
-            }
+            if (input.isPressed(Input::Button::start))
+                this->setState(State::PLAYING);
         break; 
     }
 }

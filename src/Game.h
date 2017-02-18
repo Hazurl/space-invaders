@@ -3,6 +3,7 @@
 
 #include "SpaceShip.h"
 #include "Loader.h"
+#include "Input.h"
 
 #include <SFML/Graphics.hpp>
 #include <vector>
@@ -15,8 +16,7 @@ public :
     ~Game();
 
     void initialize();
-    void update();
-    void onEvent(sf::Event::EventType const& type, sf::Event const& event);
+    void update(Input input);
     void draw();
     void setState(State st);
 
