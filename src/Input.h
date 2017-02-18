@@ -21,12 +21,17 @@ public :
 
     void updateButtons ();
     void updateButton (Button but);
+
     bool isPressed (Button but);
+    bool isJustPressed (Input::Button but);
+    bool isReleased (Input::Button but);
 
 private :
 
+    std::map<Input::Button, bool> lastButtonMap;
     std::map<Input::Button, bool> buttonMap;
-    std::map<Input::Button, sf::Keyboard::Key> keyMap;
+
+    std::map<Input::Button, sf::Keyboard::Key> keyMap; // which keyboard key corresponds to each action
 };
 
 #endif
