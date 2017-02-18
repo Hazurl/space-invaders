@@ -17,14 +17,16 @@ public :
     void invertX();
     void setPosition (float x, float y);
 
+    sf::IntRect getCollider ();
+
     void setSpriteFromFile(std::string const& path);
 
     void draw (sf::RenderWindow* window);
 
 private :
-    float x;
-    float y;
-    bool move_right;
+    float x = 0;
+    float y = 0;
+    bool move_right = true;
 
     sf::Vector2i size;
 

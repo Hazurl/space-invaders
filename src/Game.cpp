@@ -47,15 +47,25 @@ void Game::initialize () {
     }
 }
 
-void Game::update(Input input) {
+void Game::update(Input input, long deltaTime) {
     switch (this->state) {
         case State::PLAYING :
             if (input.isPressed(Input::Button::right))
-                this->player->moveX(2);
+                this->player->moveX(deltaTime);
             if (input.isPressed(Input::Button::left))
-                this->player->moveX(-2);
+                this->player->moveX(-deltaTime);
+            
             for (int i = this->invaders.size() -1; i >= 0; --i)
-                this->invaders.at(i)->update(this->invadersSpeed);
+                this->invaders.at(i)->update(this->invadersSpeed * deltaTime);
+                
+            if (this->invadersCollideWithBorders()) {
+                for (int i = this->invaders.size() -1; i >= 0; --i) {
+                    SpaceShip* inv = this->invaders.at(i);
+                    inv->invertX();
+                    inv->moveY(5);
+                    inv->update(this->invadersSpeed * deltaTime * 2);
+                }
+            }
         break;
 
         case State::PAUSE :
@@ -107,4 +117,14 @@ void Game::setState(State st) {
         this->initialize();
     }
     //std::cout << "Changement d'état en " << (st == State::PAUSE ? "Pause" : st == State::PLAYING ? "Playing" : "Menu") << std::endl;
+}
+
+bool Game::invadersCollideWithBorders() {
+    for (int i = this->invaders.size() -1; i >= 0; --i) {
+        sf::IntRect collider = this->invaders.at(i)->getCollider();
+        if (collider.left < 0 || collider.left + collider.width > this->width) {
+            return true;
+        }
+    }
+    return false;
 }

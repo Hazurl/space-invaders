@@ -16,11 +16,13 @@ public :
     ~Game();
 
     void initialize();
-    void update(Input input);
+    void update(Input input, long deltaTime);
     void draw();
     void setState(State st);
 
 private :
+    bool invadersCollideWithBorders();
+
     sf::RenderWindow* window;
     float width;
     float height;
@@ -28,7 +30,7 @@ private :
     unsigned int score;
     unsigned int life;
 
-    float invadersSpeed;
+    float invadersSpeed = 1;
 
     SpaceShip* player;
     std::vector<SpaceShip* > invaders;

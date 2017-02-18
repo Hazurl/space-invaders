@@ -4,16 +4,20 @@
 #include "Loader.h"
 #include "Input.h"
 
+#include <iostream>
+
 #define WIDTH 800
 #define HEIGHT 450
+#define SPEED 0.3
 
 int main()
 {
     sf::RenderWindow window (sf::VideoMode(WIDTH, HEIGHT), "Space Invaders", sf::Style::Close | sf::Style::Titlebar);
-    window.setFramerateLimit(120);
+    window.setFramerateLimit(60);
 
     Game game(window, WIDTH, HEIGHT);
     Input input;
+    sf::Clock clock;
 
     while (window.isOpen()) {
         sf::Event event;
@@ -23,7 +27,8 @@ int main()
         }
 
         input.updateButtons();
-        game.update(input);
+
+        game.update(input, (long)clock.restart().asMilliseconds() * SPEED);
 
         window.clear();
 

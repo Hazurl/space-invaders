@@ -20,7 +20,10 @@ void SpaceShip::setSpriteFromFile(std::string const& path) {
 }
 
 void SpaceShip::update(float speed) {
-    this->moveX(speed);
+    if (this->move_right)
+        this->moveX(speed);
+    else
+        this->moveX(-speed);
 }
 
 void SpaceShip::moveX(float amount) {
@@ -32,7 +35,7 @@ void SpaceShip::moveY(float amount) {
 }
 
 void SpaceShip::invertX() {
-    this->move_right = ! this->move_right;
+    this->move_right = !(this->move_right);
 }
 
 void SpaceShip::setPosition (float x, float y) {
@@ -40,6 +43,10 @@ void SpaceShip::setPosition (float x, float y) {
     this->y = y;
 }
 
+sf::IntRect SpaceShip::getCollider () {
+    sf::IntRect col(this->x, this->y, this->size.x, this->size.y);
+    return col;
+}
 
 void SpaceShip::draw (sf::RenderWindow* window) {
     sf::Vector2i rectPos(0, 0);
