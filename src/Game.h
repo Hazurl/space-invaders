@@ -30,7 +30,9 @@ private :
     unsigned int score;
     unsigned int life;
 
-    float invadersSpeed = 1;
+    float invadersXSpeed = 0.5;
+    float invadersYSpeed = 2;
+    float playerSpeed = 1;
 
     SpaceShip* player;
     std::vector<SpaceShip* > invaders;

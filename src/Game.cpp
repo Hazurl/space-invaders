@@ -51,9 +51,9 @@ void Game::update(Input input, long deltaTime) {
     switch (this->state) {
         case State::PLAYING :
             if (input.isPressed(Input::Button::right))
-                this->player->moveX(deltaTime);
+                this->player->moveX(this->playerSpeed * deltaTime);
             if (input.isPressed(Input::Button::left))
-                this->player->moveX(-deltaTime);
+                this->player->moveX(-this->playerSpeed * deltaTime);
             
             for (int i = this->invaders.size() -1; i >= 0; --i)
                 this->invaders.at(i)->update(this->invadersSpeed * deltaTime);
@@ -62,8 +62,8 @@ void Game::update(Input input, long deltaTime) {
                 for (int i = this->invaders.size() -1; i >= 0; --i) {
                     SpaceShip* inv = this->invaders.at(i);
                     inv->invertX();
-                    inv->moveY(5);
-                    inv->update(this->invadersSpeed * deltaTime * 2);
+                    inv->moveY(this->invadersYSpeed);
+                    inv->update(this->invadersXSpeed * deltaTime * 2);
                 }
             }
         break;
