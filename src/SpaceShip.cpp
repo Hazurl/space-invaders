@@ -8,8 +8,6 @@ SpaceShip::SpaceShip (std::string const& tx_path, unsigned int width, unsigned i
     this->x = x;
     this->y = y;
 
-    //std::cout << '(' << this->x << ", " << this->y << ")" << std::endl;
-
     this->frame_0.x = first_x;
     this->frame_0.y = first_y;
     this->frame_1.x = second_x;
