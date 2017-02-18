@@ -50,13 +50,16 @@ void Game::initialize () {
 void Game::update(Input input, long deltaTime) {
     switch (this->state) {
         case State::PLAYING :
+            if (input.isJustPressed(Input::Button::pause))
+                this->setState(State::PAUSE);
+
             if (input.isPressed(Input::Button::right))
                 this->player->moveX(this->playerSpeed * deltaTime);
             if (input.isPressed(Input::Button::left))
                 this->player->moveX(-this->playerSpeed * deltaTime);
             
             for (int i = this->invaders.size() -1; i >= 0; --i)
-                this->invaders.at(i)->update(this->invadersSpeed * deltaTime);
+                this->invaders.at(i)->update(this->invadersXSpeed * deltaTime);
                 
             if (this->invadersCollideWithBorders()) {
                 for (int i = this->invaders.size() -1; i >= 0; --i) {
@@ -69,10 +72,12 @@ void Game::update(Input input, long deltaTime) {
         break;
 
         case State::PAUSE :
+            if (input.isJustPressed(Input::Button::pause))
+                this->setState(State::PLAYING);
         break;
 
         case State::MENU :
-            if (input.isPressed(Input::Button::start))
+            if (input.isJustPressed(Input::Button::start))
                 this->setState(State::PLAYING);
         break; 
     }
@@ -80,16 +85,32 @@ void Game::update(Input input, long deltaTime) {
 
 void Game::draw () {
     switch (this->state) {
-        case State::PLAYING :
+        case State::PLAYING : {
             this->player->draw(this->window);
             for (int i = this->invaders.size() -1; i >= 0; --i)
                 this->invaders.at(i)->draw(this->window);
-        break;
+        break;}
 
-        case State::PAUSE :
-        break;
+        case State::PAUSE : {
+            this->player->draw(this->window);
+            for (int i = this->invaders.size() -1; i >= 0; --i)
+                this->invaders.at(i)->draw(this->window);
 
-        case State::MENU :
+            sf::Text pause_text;
+            pause_text.setFont(this->main_font);
+            pause_text.setString("PAUSE");
+            pause_text.setCharacterSize(48);
+            pause_text.setColor(sf::Color::White);
+
+            float w = pause_text.getGlobalBounds().width;
+
+            pause_text.setPosition(this->width / 2 - w / 2,
+                                         this->height * 0.7);
+
+            this->window->draw(pause_text);
+        break; }
+
+        case State::MENU : {
             this->window->draw(title);
 
             sf::Text press_space_text;
@@ -104,7 +125,7 @@ void Game::draw () {
                                          this->height * 0.7);
 
             this->window->draw(press_space_text);
-        break; 
+        break; }
     }
 }
 
@@ -112,10 +133,11 @@ void Game::setState(State st) {
     if (this->state == st)
         return;
 
-    if (st == State::PLAYING) {
-        this->state = st;
+    if (st == State::PLAYING && this->state == State::MENU) {
         this->initialize();
     }
+
+    this->state = st;
     //std::cout << "Changement d'état en " << (st == State::PAUSE ? "Pause" : st == State::PLAYING ? "Playing" : "Menu") << std::endl;
 }
 
