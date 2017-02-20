@@ -1,13 +1,13 @@
 #include "Input.h"
 
 Input::Input () {
-    this->keyMap[Button::up]            = sf::Keyboard::Key::Up;
-    this->keyMap[Button::down]          = sf::Keyboard::Key::Down;
-    this->keyMap[Button::right]         = sf::Keyboard::Key::Right;
-    this->keyMap[Button::left]          = sf::Keyboard::Key::Left;
-    this->keyMap[Button::fire]          = sf::Keyboard::Key::Space;
-    this->keyMap[Button::pause]         = sf::Keyboard::Key::P;
-    this->keyMap[Button::start]         = sf::Keyboard::Key::Space;
+    this->keysMap[Button::up]            = { sf::Keyboard::Key::Up };
+    this->keysMap[Button::down]          = { sf::Keyboard::Key::Down };
+    this->keysMap[Button::right]         = { sf::Keyboard::Key::Right };
+    this->keysMap[Button::left]          = { sf::Keyboard::Key::Left };
+    this->keysMap[Button::fire]          = { sf::Keyboard::Key::Space };
+    this->keysMap[Button::pause]         = { sf::Keyboard::Key::P, sf::Keyboard::Key::Escape };
+    this->keysMap[Button::start]         = { sf::Keyboard::Key::Space };
 
     this->buttonMap[Button::up]         = this->lastButtonMap[Button::up]     = false;
     this->buttonMap[Button::down]       = this->lastButtonMap[Button::down]   = false;
@@ -34,7 +34,12 @@ void Input::updateButtons () {
 
 void Input::updateButton (Button but) {
     this->lastButtonMap[but] = this->buttonMap[but];
-    this->buttonMap[but] = sf::Keyboard::isKeyPressed(this->keyMap[but]);
+
+    bool isPress = false;
+    for (auto it = this->keysMap[but].begin(); it < this->keysMap[but].end(); ++it)
+        isPress = isPress || sf::Keyboard::isKeyPressed(*it);
+
+    this->buttonMap[but] = isPress;
 }
 
 bool Input::isPressed (Input::Button but) {

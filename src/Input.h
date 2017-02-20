@@ -31,7 +31,7 @@ private :
     std::map<Input::Button, bool> lastButtonMap;
     std::map<Input::Button, bool> buttonMap;
 
-    std::map<Input::Button, sf::Keyboard::Key> keyMap; // which keyboard key corresponds to each action
+    std::map<Input::Button, std::vector<sf::Keyboard::Key>> keysMap; // which keyboard keys corresponds to each action
 };
 
 #endif
