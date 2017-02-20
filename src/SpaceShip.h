@@ -8,7 +8,7 @@
 
 class SpaceShip {
 public :
-    SpaceShip (std::string const& tx_path, unsigned int size = 32, float x = 0.0, float y = 0.0);
+    SpaceShip (std::string const& tx_path, unsigned int framesCount, unsigned int size = 32, float x = 0.0, float y = 0.0);
     ~SpaceShip();
 
     void update(float speed);
@@ -19,7 +19,8 @@ public :
 
     sf::IntRect getCollider ();
 
-    void setSpriteFromFile(std::string const& path);
+    void setSpriteFromFile(std::string const& path, unsigned int framesCount, unsigned int size = 32);
+    void nextFrame();
 
     void draw (sf::RenderWindow* window);
 
@@ -29,6 +30,8 @@ private :
     bool move_right = true;
 
     sf::Vector2i size;
+    unsigned int framesCount;
+    unsigned int currentFrame;
 
     sf::Sprite sp;
 };

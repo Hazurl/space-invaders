@@ -2,21 +2,34 @@
 
 #include <iostream>
 
-SpaceShip::SpaceShip (std::string const& tx_path, unsigned int size, float x, float y) {
+SpaceShip::SpaceShip (std::string const& tx_path, unsigned int framesCount, unsigned int size, float x, float y) {
     this->setSpriteFromFile(tx_path);
     this->x = x;
     this->y = y;
 
     this->size.x = size;
     this->size.y = size;
+
+    this->framesCount = framesCount;
+    this->currentFrame = 0;
 }
 
 SpaceShip::~SpaceShip() {
 
 }
 
-void SpaceShip::setSpriteFromFile(std::string const& path) {
+void SpaceShip::setSpriteFromFile(std::string const& path, unsigned int framesCount, unsigned int size) {
     this->sp.setTexture(Loader::getTexture(path));
+
+    this->size.x = size;
+    this->size.y = size;
+
+    this->framesCount = framesCount;
+    this->currentFrame = 0;
+}
+
+void SpaceShip::nextFrame () {
+    this->currentFrame = (++this->currentFrame) % this->frameCount;
 }
 
 void SpaceShip::update(float speed) {
@@ -49,7 +62,7 @@ sf::IntRect SpaceShip::getCollider () {
 }
 
 void SpaceShip::draw (sf::RenderWindow* window) {
-    sf::Vector2i rectPos(0, 0);
+    sf::Vector2i rectPos(this->size.x * this->currentFrame, 0);
     sf::IntRect rect(rectPos, this->size);
     sp.setTextureRect(rect);
     this->sp.setPosition(this->x, this->y);
