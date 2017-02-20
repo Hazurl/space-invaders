@@ -8,7 +8,7 @@
 
 class SpaceShip {
 public :
-    SpaceShip (std::string const& tx_path, unsigned int framesCount, unsigned int size = 32, float x = 0.0, float y = 0.0);
+    SpaceShip (std::string const& path, unsigned int framesCount, unsigned int size = 32, float x = 0.0, float y = 0.0);
     ~SpaceShip();
 
     void update(float speed);

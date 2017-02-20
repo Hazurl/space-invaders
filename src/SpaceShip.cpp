@@ -2,10 +2,10 @@
 
 #include <iostream>
 
-SpaceShip::SpaceShip (std::string const& tx_path, unsigned int framesCount, unsigned int size, float x, float y) :
+SpaceShip::SpaceShip (std::string const& path, unsigned int framesCount, unsigned int size, float x, float y) :
     x(x), y(y) {
         
-    this->setSpriteFromFile(tx_path, framesCount, size);
+    this->setSpriteFromFile(path, framesCount, size);
 }
 
 SpaceShip::~SpaceShip() {
