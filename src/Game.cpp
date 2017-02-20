@@ -2,14 +2,8 @@
 
 #include <iostream>
 
-Game::Game(sf::RenderWindow & window, unsigned int width, unsigned int height) {
-    this->window = &window;
-    this->height = height;
-    this->width = width;
-
-    this->state = State::MENU;
-
-    this->player = nullptr;
+Game::Game(sf::RenderWindow & window, unsigned int width, unsigned int height) :
+    window(&window), width(width), height(height), player(nullptr), state(State::MENU) {
 
     // Font
     if (!this->main_font.loadFromFile("font/pixelmix/pixelmix.ttf")) {
