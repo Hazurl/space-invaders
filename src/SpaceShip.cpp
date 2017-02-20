@@ -67,3 +67,11 @@ void SpaceShip::draw (sf::RenderWindow* window) {
     this->sp.setPosition(this->x, this->y);
     window->draw(this->sp);
 }
+
+float SpaceShip::getX() {
+    return this->x;
+}
+
+float SpaceShip::getY() {
+    return this->y;
+}

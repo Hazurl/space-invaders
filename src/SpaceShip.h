@@ -24,6 +24,9 @@ public :
 
     void draw (sf::RenderWindow* window);
 
+    float getX();
+    float getY();
+
 private :
     float x = 0;
     float y = 0;
