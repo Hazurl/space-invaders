@@ -52,11 +52,13 @@ void Game::initialize () {
 void Game::update(Input input, long deltaTime) {
     switch (this->state) {
         case State::PLAYING :
-            this->ticks++;
+            this->ticksDeltaTime += deltaTime;
 
-            if (this->ticks % 20 == 0)
-                for (int i = this->invaders.size() -1; i >= 0; --i)
-                    this->invaders.at(i)->nextFrame();
+            if (this->ticksDeltaTime >= TICKS_TIME) {
+                ticksDeltaTime -= TICKS_TIME;
+                this->nextGameTick();
+            }
+                
 
             if (input.isJustPressed(Input::Button::pause))
                 this->setState(State::PAUSE);
@@ -89,6 +91,14 @@ void Game::update(Input input, long deltaTime) {
                 this->setState(State::PLAYING);
         break; 
     }
+}
+
+void Game::nextGameTick () {
+    this->ticks++;
+
+    // SpaceShip Animation
+    for (int i = this->invaders.size() -1; i >= 0; --i)
+        this->invaders.at(i)->nextFrame();
 }
 
 void Game::draw () {

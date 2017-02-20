@@ -8,7 +8,7 @@
 
 #define WIDTH 500
 #define HEIGHT 600
-#define SPEED 0.3
+#define SPEED 1
 
 int main()
 {

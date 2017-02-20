@@ -8,6 +8,8 @@
 #include <SFML/Graphics.hpp>
 #include <vector>
 
+#define TICKS_TIME 500
+
 enum class State { PAUSE, PLAYING, MENU };
 
 class Game {
@@ -16,8 +18,12 @@ public :
     ~Game();
 
     void initialize();
+
     void update(Input input, long deltaTime);
+    void nextGameTick ();
+
     void draw();
+
     void setState(State st);
 
 private :
@@ -30,11 +36,12 @@ private :
     unsigned int score;
     unsigned int life;
 
-    float invadersXSpeed = 0.5;
-    float invadersYSpeed = 2;
-    float playerSpeed = 1;
+    float invadersXSpeed = 0.1;
+    float invadersYSpeed = 5;
+    float playerSpeed = 0.3;
 
-    unsigned int ticks = 0;
+    unsigned long ticks = 0;
+    unsigned long ticksDeltaTime = 0;
 
     SpaceShip* player;
     std::vector<SpaceShip* > invaders;
