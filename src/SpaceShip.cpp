@@ -3,15 +3,9 @@
 #include <iostream>
 
 SpaceShip::SpaceShip (std::string const& tx_path, unsigned int framesCount, unsigned int size, float x, float y) {
-    this->setSpriteFromFile(tx_path);
+    this->setSpriteFromFile(tx_path, framesCount, size);
     this->x = x;
     this->y = y;
-
-    this->size.x = size;
-    this->size.y = size;
-
-    this->framesCount = framesCount;
-    this->currentFrame = 0;
 }
 
 SpaceShip::~SpaceShip() {
@@ -29,7 +23,7 @@ void SpaceShip::setSpriteFromFile(std::string const& path, unsigned int framesCo
 }
 
 void SpaceShip::nextFrame () {
-    this->currentFrame = (++this->currentFrame) % this->frameCount;
+    this->currentFrame = (++this->currentFrame) % this->framesCount;
 }
 
 void SpaceShip::update(float speed) {

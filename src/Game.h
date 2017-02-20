@@ -34,6 +34,8 @@ private :
     float invadersYSpeed = 2;
     float playerSpeed = 1;
 
+    unsigned int ticks = 0;
+
     SpaceShip* player;
     std::vector<SpaceShip* > invaders;
 

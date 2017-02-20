@@ -6,8 +6,8 @@
 
 #include <iostream>
 
-#define WIDTH 800
-#define HEIGHT 450
+#define WIDTH 500
+#define HEIGHT 600
 #define SPEED 0.3
 
 int main()

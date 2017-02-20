@@ -37,19 +37,27 @@ void Game::initialize () {
     this->score = 0;
     this->life = 3;
 
-    this->player = new SpaceShip("img/player_0.bmp", 32, this->width / 2, this->height - 50);
-    for (int i = 0; i < 11; ++i) {
-        this->invaders.push_back(new SpaceShip("img/inv_a.bmp", 32, this->width * i / 14, 10)); // rangé du fond
-        this->invaders.push_back(new SpaceShip("img/inv_b.bmp", 32, this->width * i / 14, 60)); // rangé du milieu
-        this->invaders.push_back(new SpaceShip("img/inv_b.bmp", 32, this->width * i / 14, 110)); // de meme
-        this->invaders.push_back(new SpaceShip("img/inv_c.bmp", 32, this->width * i / 14, 160)); // seconde rangé
-        this->invaders.push_back(new SpaceShip("img/inv_c.bmp", 32, this->width * i / 14, 210)); // première rangé
+    this->ticks = 0;
+
+    this->player = new SpaceShip("img/player_0.bmp", 1, 32, this->width / 2, this->height - 50);
+    for (int i = 1; i < 12; ++i) {
+        this->invaders.push_back(new SpaceShip("img/inv_a.bmp", 2, 32, 35 * i, 5)); // rangé du fond
+        this->invaders.push_back(new SpaceShip("img/inv_b.bmp", 2, 32, 35 * i, 45)); // rangé du milieu
+        this->invaders.push_back(new SpaceShip("img/inv_b.bmp", 2, 32, 35 * i, 85)); // de meme
+        this->invaders.push_back(new SpaceShip("img/inv_c.bmp", 2, 32, 35 * i, 125)); // seconde rangé
+        this->invaders.push_back(new SpaceShip("img/inv_c.bmp", 2, 32, 35 * i, 165)); // première rangé
     }
 }
 
 void Game::update(Input input, long deltaTime) {
     switch (this->state) {
         case State::PLAYING :
+            this->ticks++;
+
+            if (this->ticks % 20 == 0)
+                for (int i = this->invaders.size() -1; i >= 0; --i)
+                    this->invaders.at(i)->nextFrame();
+
             if (input.isJustPressed(Input::Button::pause))
                 this->setState(State::PAUSE);
 
