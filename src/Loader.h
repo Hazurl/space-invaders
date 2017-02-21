@@ -5,6 +5,8 @@
 #include <map>
 #include <SFML/Graphics.hpp>
 
+#define MASK_COLOR sf::Color(0, 0, 0)
+
 class Loader {
 public :
     static sf::Texture& getTexture(std::string path);

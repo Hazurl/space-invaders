@@ -11,11 +11,19 @@ void Loader::clean () {
 
 sf::Texture& Loader::getTexture(std::string path) {
     if (Loader::texturesMap.find(path) == Loader::texturesMap.end()) {
-        sf::Texture* tx = new sf::Texture();
-        if (!tx->loadFromFile(path)) {
-            std::cerr << "impossible d'oucrir la texture : " << path << std::endl;
+        sf::Image* img = new sf::Image();
+        if (!img->loadFromFile(path)) {
+            std::cerr << "Impossible d'oucrir la texture : " << path << std::endl;
             exit(1);
         }
+
+        img->createMaskFromColor(MASK_COLOR, 0);
+
+        sf::Texture* tx = new sf::Texture();
+        tx->loadFromImage(*img);
+
+        delete img;
+
         return *(Loader::texturesMap[path] = tx);
     }
 
