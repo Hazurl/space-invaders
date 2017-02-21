@@ -41,7 +41,13 @@ sf::IntRect Bullet::getCollider () {
 void Bullet::draw(sf::RenderWindow* window) {
     sf::Vector2i rectPos(this->size.x * this->currentFrame, 0);
     sf::IntRect rect(rectPos, this->size);
-    sp.setTextureRect(rect);
+
+    this->sp.setTextureRect(rect);
     this->sp.setPosition(this->x, this->y);
+    if (!move_down) {
+        this->sp.setOrigin(this->size.x / 2, this->size.y / 2);
+        this->sp.setRotation(180);
+    }
+
     window->draw(this->sp);
 }
