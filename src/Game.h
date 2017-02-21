@@ -4,6 +4,7 @@
 #include "SpaceShip.h"
 #include "Loader.h"
 #include "Input.h"
+#include "Bullet.h"
 
 #include <SFML/Graphics.hpp>
 #include <vector>
@@ -20,6 +21,8 @@ public :
     void initialize();
 
     void update(Input input, long deltaTime);
+    void fire_player ();
+    void fire_invaders ();
     void nextGameTick ();
 
     void draw();
@@ -39,12 +42,16 @@ private :
     float invadersXSpeed = 0.1;
     float invadersYSpeed = 5;
     float playerSpeed = 0.3;
+    float bulletSpeed = 0.2;
 
     unsigned long ticks = 0;
     unsigned long ticksDeltaTime = 0;
 
     SpaceShip* player;
+    Bullet* playerBullet;
+    
     std::vector<SpaceShip* > invaders;
+    Bullet* invBullet;
 
     State state;
 

@@ -3,7 +3,7 @@
 #include <iostream>
 
 Game::Game(sf::RenderWindow & window, unsigned int width, unsigned int height) :
-    window(&window), width(width), height(height), player(nullptr), state(State::MENU) {
+    window(&window), width(width), height(height), player(nullptr), playerBullet(nullptr), invBullet(nullptr), state(State::MENU) {
 
     // Font
     if (!this->main_font.loadFromFile("font/pixelmix/pixelmix.ttf")) {
@@ -46,21 +46,30 @@ void Game::initialize () {
 void Game::update(Input input, long deltaTime) {
     switch (this->state) {
         case State::PLAYING :
+
+        /* TICKS */
             this->ticksDeltaTime += deltaTime;
 
             if (this->ticksDeltaTime >= TICKS_TIME) {
                 ticksDeltaTime -= TICKS_TIME;
                 this->nextGameTick();
             }
-                
+
+        /* INPUT */
+
+            if (input.isJustPressed(Input::Button::fire))
+                this->fire_player();                
 
             if (input.isJustPressed(Input::Button::pause))
                 this->setState(State::PAUSE);
 
             if (input.isPressed(Input::Button::right))
                 this->player->moveX(this->playerSpeed * deltaTime);
+
             if (input.isPressed(Input::Button::left))
                 this->player->moveX(-this->playerSpeed * deltaTime);
+
+        /* UPDATE POSITION */
             
             for (int i = this->invaders.size() -1; i >= 0; --i)
                 this->invaders.at(i)->update(this->invadersXSpeed * deltaTime);
@@ -73,6 +82,13 @@ void Game::update(Input input, long deltaTime) {
                     inv->update(this->invadersXSpeed * deltaTime * 2);
                 }
             }
+
+            if (this->playerBullet)
+                this->playerBullet->update(bulletSpeed * deltaTime);
+
+            if (this->invBullet)
+                this->invBullet->update(bulletSpeed * deltaTime);
+
         break;
 
         case State::PAUSE :
@@ -85,6 +101,17 @@ void Game::update(Input input, long deltaTime) {
                 this->setState(State::PLAYING);
         break; 
     }
+}
+
+void Game::fire_player() {
+    if (this->playerBullet != nullptr)
+        return;
+
+    this->playerBullet = new Bullet("img/shot.bmp", 1, 32, this->player->getX(), this->player->getY(), false);
+}
+
+void Game::fire_invaders() {
+
 }
 
 void Game::nextGameTick () {
@@ -101,6 +128,12 @@ void Game::draw () {
             this->player->draw(this->window);
             for (int i = this->invaders.size() -1; i >= 0; --i)
                 this->invaders.at(i)->draw(this->window);
+
+            if (this->playerBullet)
+                this->playerBullet->draw(this->window);
+
+            if (this->invBullet)
+                this->invBullet->draw(this->window);
         break;}
 
         case State::PAUSE : {
