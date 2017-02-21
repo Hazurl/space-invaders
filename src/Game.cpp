@@ -107,7 +107,7 @@ void Game::fire_player() {
     if (this->playerBullet != nullptr)
         return;
 
-    this->playerBullet = new Bullet("img/shot.bmp", 1, 32, this->player->getX(), this->player->getY(), false);
+    this->playerBullet = new Bullet("img/shot.bmp", 1, 16, this->player->getX() + 16, this->player->getY(), false);
 }
 
 void Game::fire_invaders() {
