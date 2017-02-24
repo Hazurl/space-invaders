@@ -1,0 +1,78 @@
+{
+    "images" : {
+        "bonus.bmp" : {
+            "frame" : 1,
+            "width" : 48,
+            "height" : 21
+        },
+
+
+        "defense_0.bmp" : {
+            "frame" : 1,
+            "width" : 44,
+            "height" : 32
+        },
+        "defense_1.bmp" : {
+            "frame" : 1,
+            "width" : 44,
+            "height" : 32
+        },
+        "defense_2.bmp" : {
+            "frame" : 1,
+            "width" : 36,
+            "height" : 32
+        },
+        "defense_3.bmp" : {
+            "frame" : 1,
+            "width" : 44,
+            "height" : 32
+        },
+        "defense_4.bmp" : {
+            "frame" : 1,
+            "width" : 44,
+            "height" : 32
+        },
+
+        "explosion.bmp" : {
+            "frame" : 1,
+            "width" : 26,
+            "height" : 16
+        },
+
+
+        "inv_a.bmp" : {
+            "frame" : 2,
+            "width" : 16,
+            "height" : 16
+        },
+        "inv_b.bmp" : {
+            "frame" : 2,
+            "width" : 22,
+            "height" : 16
+        },
+        "inv_c.bmp" : {
+            "frame" : 2,
+            "width" : 24,
+            "height" : 21
+        },
+
+
+        "player_0.bmp" : {
+            "frame" : 1,
+            "width" : 26,
+            "height" : 16
+        },
+        "player_1.bmp" : {
+            "frame" : 1,
+            "width" : 30,
+            "height" : 16
+        },
+
+
+        "shot.bmp" : {
+            "frame" : 1,
+            "width" : 6,
+            "height" : 12
+        }
+    }
+}
