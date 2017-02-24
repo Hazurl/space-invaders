@@ -3,6 +3,7 @@ SRC_DIR := src
 SRC := $(foreach d,$(SRC_DIR),$(wildcard $(d)/*.cpp))
 
 BUILD_DIR := $(addprefix build/,$(SRC_DIR))
+DEST := build/spaceinvaders
 
 OBJ := $(patsubst %.cpp,build/%.o,$(SRC))
 
@@ -17,7 +18,7 @@ all: build/spaceinvaders
 
 # Main build task
 build/spaceinvaders: $(BUILD_DIR) $(OBJ)
-	g++ $(FLAGS) -o build/spaceinvaders $(OBJ) $(LIBS)
+	g++ $(FLAGS) -o $(DEST) $(OBJ) $(LIBS)
 	@echo "---------------"
 	@echo "Build finished!"
 	@echo "---------------"
@@ -33,4 +34,14 @@ clean:
 	rm -rf build
 	@echo "----------------"
 	@echo "Project cleaned."
+	@echo "----------------"
+
+
+run:
+	@echo "----------------"
+	@echo "      Run"
+	@echo "----------------"
+	@$(DEST)
+	@echo "----------------"
+	@echo "      Stop"
 	@echo "----------------"
