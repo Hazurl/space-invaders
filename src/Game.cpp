@@ -6,13 +6,13 @@ Game::Game(sf::RenderWindow & window, unsigned int width, unsigned int height) :
     window(&window), width(width), height(height), player(nullptr), playerBullet(nullptr), invBullet(nullptr), state(State::MENU) {
 
     // Font
-    if (!this->main_font.loadFromFile("font/pixelmix/pixelmix.ttf")) {
+    if (!this->main_font.loadFromFile(FONT_PATH("pixelmix/pixelmix.ttf"))) {
         std::cerr << "Impossible d'ouvrir la police principale" << std::endl;
         exit(1);
     }
 
     // Sprite
-    this->title.setTexture(Loader::getTexture("img/title.bmp"));
+    this->title.setTexture(Loader::get.getTexture(IMAGE_PATH("title.bmp")));
     this->title.setPosition(this->width / 2 - this->title.getTextureRect().width / 2,
                             this->height * 0.2);
 } 

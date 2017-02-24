@@ -19,7 +19,7 @@ void Bullet::update (float speed) {
 }
 
 void Bullet::setSpriteFromFile(std::string const& path, unsigned int framesCount, unsigned int size) {
-    this->sp.setTexture(Loader::getTexture(path));
+    this->sp.setTexture(Loader::get.getTexture(path));
 
     this->size.x = size;
     this->size.y = size;
