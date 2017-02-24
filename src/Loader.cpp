@@ -24,7 +24,7 @@ sf::Texture& Loader::getTexture(std::string path) {
 }
 
 Loader::Loader& get() {
-    static S    instance;
+    static Loader instance;
     return instance;
 }
 
