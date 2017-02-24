@@ -5,7 +5,7 @@
 #include "Loader.h"
 #include "Input.h"
 #include "Bullet.h"
-#include "define.h"
+#include "Define.h"
 
 #include <SFML/Graphics.hpp>
 #include <vector>

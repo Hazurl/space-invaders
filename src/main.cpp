@@ -3,7 +3,7 @@
 #include "Game.h"
 #include "Loader.h"
 #include "Input.h"
-#include "define.h"
+#include "Define.h"
 
 #include <iostream>
 
