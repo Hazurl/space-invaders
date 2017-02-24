@@ -3,12 +3,9 @@
 #include "Game.h"
 #include "Loader.h"
 #include "Input.h"
+#include "define.h"
 
 #include <iostream>
-
-#define WIDTH 500
-#define HEIGHT 600
-#define SPEED 1
 
 int main()
 {

@@ -33,13 +33,13 @@ void Game::initialize () {
 
     this->ticks = 0;
 
-    this->player = new SpaceShip("img/player_0.bmp", 1, 32, this->width / 2, this->height - 50);
+    this->player = new SpaceShip(IMAGE_PATH("player_0.bmp"), 1, 32, this->width / 2, this->height - 50);
     for (int i = 1; i < 12; ++i) {
-        this->invaders.push_back(new SpaceShip("img/inv_a.bmp", 2, 32, 35 * i, 5)); // rangé du fond
-        this->invaders.push_back(new SpaceShip("img/inv_b.bmp", 2, 32, 35 * i, 45)); // rangé du milieu
-        this->invaders.push_back(new SpaceShip("img/inv_b.bmp", 2, 32, 35 * i, 85)); // de meme
-        this->invaders.push_back(new SpaceShip("img/inv_c.bmp", 2, 32, 35 * i, 125)); // seconde rangé
-        this->invaders.push_back(new SpaceShip("img/inv_c.bmp", 2, 32, 35 * i, 165)); // première rangé
+        this->invaders.push_back(new SpaceShip(IMAGE_PATH("inv_a.bmp"), 2, 32, 35 * i, 5)); // rangé du fond
+        this->invaders.push_back(new SpaceShip(IMAGE_PATH("inv_b.bmp"), 2, 32, 35 * i, 45)); // rangé du milieu
+        this->invaders.push_back(new SpaceShip(IMAGE_PATH("inv_b.bmp"), 2, 32, 35 * i, 85)); // de meme
+        this->invaders.push_back(new SpaceShip(IMAGE_PATH("inv_c.bmp"), 2, 32, 35 * i, 125)); // seconde rangé
+        this->invaders.push_back(new SpaceShip(IMAGE_PATH("inv_c.bmp"), 2, 32, 35 * i, 165)); // première rangé
     }
 }
 
@@ -107,7 +107,7 @@ void Game::fire_player() {
     if (this->playerBullet != nullptr)
         return;
 
-    this->playerBullet = new Bullet("img/shot.bmp", 1, 16, this->player->getX() + 16, this->player->getY(), false);
+    this->playerBullet = new Bullet(IMAGE_PATH("shot.bmp"), 1, 16, this->player->getX() + 16, this->player->getY(), false);
 }
 
 void Game::fire_invaders() {
