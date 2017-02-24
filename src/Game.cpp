@@ -12,7 +12,7 @@ Game::Game(sf::RenderWindow & window, unsigned int width, unsigned int height) :
     }
 
     // Sprite
-    this->title.setTexture(Loader::get.getTexture(IMAGE_PATH("title.bmp")));
+    this->title.setTexture(Loader::get().getTexture(IMAGE_PATH("title.bmp")));
     this->title.setPosition(this->width / 2 - this->title.getTextureRect().width / 2,
                             this->height * 0.2);
 } 

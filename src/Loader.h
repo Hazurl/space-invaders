@@ -10,14 +10,14 @@
 class Loader {
 public:
     Loader(Loader const&)               = delete;
-    void operator=(S const&)            = delete;
+    void operator=(Loader const&)            = delete;
     static Loader& get();
 
     sf::Texture& getTexture(std::string path);
 
 private:
     Loader();
-    static std::map<std::string, sf::Texture* > texturesMap;
+    std::map<std::string, sf::Texture* > texturesMap;
 };
 
 #endif

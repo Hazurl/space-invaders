@@ -23,7 +23,7 @@ sf::Texture& Loader::getTexture(std::string path) {
     return *texturesMap[path];
 }
 
-Loader::Loader& get() {
+Loader& Loader::get() {
     static Loader instance;
     return instance;
 }

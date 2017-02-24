@@ -34,7 +34,5 @@ int main()
         window.display();
     }
 
-    Loader::clean();
-
     return 0;
 }
