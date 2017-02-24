@@ -7,5 +7,6 @@
 
 #define IMAGE_PATH(x) "img/" x
 #define SETTINGS_PATH(x) "settings/" x
+#define FONT_PATH(x) "font/" x
 
 #endif
