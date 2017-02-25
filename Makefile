@@ -45,3 +45,5 @@ run:
 	@echo "----------------"
 	@echo "      Stop"
 	@echo "----------------"
+
+again: clean build/spaceinvaders
