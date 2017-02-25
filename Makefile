@@ -10,9 +10,7 @@ OBJ := $(patsubst %.cpp,build/%.o,$(SRC))
 OPTIM := -O2
 FLAGS := -std=c++17 -g3 -Wall -Wextra -Wno-pmf-conversions
 LIBS := -lsfml-graphics -lsfml-window -lsfml-system
-MAKEFLAGS += --jobs=$(shell nproc)
-
-#.PHONY: test
+MAKEFLAGS += --no-print-directory
 
 all: build/spaceinvaders
 
@@ -37,7 +35,7 @@ clean:
 	@echo "----------------"
 
 
-run:
+run: build/spaceinvaders
 	@echo "----------------"
 	@echo "      Run"
 	@echo "----------------"
@@ -46,4 +44,10 @@ run:
 	@echo "      Stop"
 	@echo "----------------"
 
-again: clean build/spaceinvaders
+again:
+	@make clean
+	@make build/spaceinvaders
+
+test:
+	@make again
+	@make run
