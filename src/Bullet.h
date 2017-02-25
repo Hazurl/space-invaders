@@ -2,17 +2,19 @@
 #define __BULLET_H__
 
 #include "Loader.h"
+#include "Define.h"
+#include "Settings.h"
 
 #include <string>
 #include <SFML/Graphics.hpp>
 
 class Bullet {
 public :
-    Bullet (std::string const& path, unsigned int framesCount, unsigned int size = 32, float x = 0, float y = 0, bool move_down = false);
+    Bullet (std::string const& path, float x = 0, float y = 0, bool move_down = false);
     ~Bullet ();
 
     void update (float speed);
-    void setSpriteFromFile(std::string const& path, unsigned int framesCount, unsigned int size = 32);
+    void setSpriteFromFile(std::string const& path);
 
     sf::IntRect getCollider ();
 

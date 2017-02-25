@@ -2,9 +2,9 @@
 
 #include <iostream>
 
-Bullet::Bullet (std::string const& path, unsigned int framesCount, unsigned int size, float x, float y, bool move_down) :
+Bullet::Bullet (std::string const& imgName, float x, float y, bool move_down) :
     x(x), y(y), move_down(move_down) {
-    this->setSpriteFromFile(path, framesCount, size);
+    this->setSpriteFromFile(imgName);
 }
 
 Bullet::~Bullet () {
@@ -18,18 +18,15 @@ void Bullet::update (float speed) {
         this->y -= speed;
 }
 
-void Bullet::setSpriteFromFile(std::string const& path, unsigned int framesCount, unsigned int size) {
-    this->sp.setTexture(Loader::get().getTexture(path));
+void Bullet::setSpriteFromFile(std::string const& imgName) {
+    this->sp.setTexture( Loader::get().getTexture( IMAGE_PATH("") + imgName ) );
 
-    this->size.x = size;
-    this->size.y = size;
+    ImageSettings sett = Settings::get().getImageSettings(imgName);
 
-    if (framesCount == 0) {
-        std::cout << "Bullet must hace atleast one frame" << std::endl;
-        exit(1);
-    }
+    this->size.x = sett.width;
+    this->size.y = sett.height;
 
-    this->framesCount = framesCount;
+    this->framesCount = sett.frame;
     this->currentFrame = 0;
 }
 

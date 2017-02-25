@@ -2,13 +2,15 @@
 #define __SPACESHIP_H__
 
 #include "Loader.h"
+#include "Define.h"
+#include "Settings.h"
 
 #include <string>
 #include <SFML/Graphics.hpp>
 
 class SpaceShip {
 public :
-    SpaceShip (std::string const& path, unsigned int framesCount, unsigned int size = 32, float x = 0.0, float y = 0.0);
+    SpaceShip (std::string const& imgName, float x = 0.0, float y = 0.0);
     ~SpaceShip();
 
     void update(float speed);
@@ -19,7 +21,7 @@ public :
 
     sf::IntRect getCollider ();
 
-    void setSpriteFromFile(std::string const& path, unsigned int framesCount, unsigned int size = 32);
+    void setSpriteFromFile(std::string const& imgName);
     void nextFrame();
 
     void draw (sf::RenderWindow* window);

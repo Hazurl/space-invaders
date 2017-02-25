@@ -2,28 +2,25 @@
 
 #include <iostream>
 
-SpaceShip::SpaceShip (std::string const& path, unsigned int framesCount, unsigned int size, float x, float y) :
+SpaceShip::SpaceShip (std::string const& imgName, float x, float y) :
     x(x), y(y) {
         
-    this->setSpriteFromFile(path, framesCount, size);
+    this->setSpriteFromFile(imgName);
 }
 
 SpaceShip::~SpaceShip() {
 
 }
 
-void SpaceShip::setSpriteFromFile(std::string const& path, unsigned int framesCount, unsigned int size) {
-    this->sp.setTexture(Loader::get().getTexture(path));
+void SpaceShip::setSpriteFromFile(std::string const& imgName) {
+    this->sp.setTexture( Loader::get().getTexture( IMAGE_PATH("") + imgName ) );
 
-    this->size.x = size;
-    this->size.y = size;
+    ImageSettings sett = Settings::get().getImageSettings(imgName);
 
-    if (framesCount == 0) {
-        std::cout << "SpaceShip must hace atleast one frame" << std::endl;
-        exit(1);
-    }
+    this->size.x = sett.width;
+    this->size.y = sett.height;
 
-    this->framesCount = framesCount;
+    this->framesCount = sett.frame;
     this->currentFrame = 0;
 }
 
