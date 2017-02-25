@@ -2,6 +2,12 @@
 
 #include <iostream>
 
+#define SPACE_BETWEEN_INV_X 35 
+#define SPACE_BETWEEN_INV_Y 40 
+
+#define INV_POS_Y 5
+#define PLAYER_POS_Y_OFFSET 50
+
 Game::Game(sf::RenderWindow & window, unsigned int width, unsigned int height) :
     window(&window), width(width), height(height), player(nullptr), playerBullet(nullptr), invBullet(nullptr), state(State::MENU) {
 
@@ -33,13 +39,14 @@ void Game::initialize () {
 
     this->ticks = 0;
 
-    this->player = new SpaceShip("player_0.bmp", this->width / 2, this->height - 50);
+    this->player = new SpaceShip("player_0.bmp", this->width / 2, this->height - PLAYER_POS_Y_OFFSET);
     for (int i = 1; i < 12; ++i) {
-        this->invaders.push_back(new SpaceShip("inv_a.bmp", 35 * i, 5)); // rangé du fond
-        this->invaders.push_back(new SpaceShip("inv_b.bmp", 35 * i, 45)); // rangé du milieu
-        this->invaders.push_back(new SpaceShip("inv_b.bmp", 35 * i, 85)); // de meme
-        this->invaders.push_back(new SpaceShip("inv_c.bmp", 35 * i, 125)); // seconde rangé
-        this->invaders.push_back(new SpaceShip("inv_c.bmp", 35 * i, 165)); // première rangé
+        float posX = SPACE_BETWEEN_INV_X * i;
+        this->invaders.push_back(new SpaceShip("inv_a.bmp", posX, INV_POS_Y)); // rangé du fond
+        this->invaders.push_back(new SpaceShip("inv_b.bmp", posX, INV_POS_Y + SPACE_BETWEEN_INV_Y)); // rangé du milieu
+        this->invaders.push_back(new SpaceShip("inv_b.bmp", posX, INV_POS_Y + SPACE_BETWEEN_INV_Y * 2)); // de meme
+        this->invaders.push_back(new SpaceShip("inv_c.bmp", posX, INV_POS_Y + SPACE_BETWEEN_INV_Y * 3)); // seconde rangé
+        this->invaders.push_back(new SpaceShip("inv_c.bmp", posX, INV_POS_Y + SPACE_BETWEEN_INV_Y * 4)); // première rangé
     }
 }
 
@@ -62,12 +69,20 @@ void Game::update(Input input, long deltaTime) {
 
             if (input.isJustPressed(Input::Button::pause))
                 this->setState(State::PAUSE);
-            if (input.isPressed(Input::Button::right))
+
+            if (input.isPressed(Input::Button::right)) {
                 this->player->moveX(this->playerSpeed * deltaTime);
+                float limit = this->width - this->player->getCollider().width / 2;
+                if (this->player->getX() > limit)
+                    this->player->setPosition(limit, this->player->getY());
+            }
 
-            if (input.isPressed(Input::Button::left))
+            if (input.isPressed(Input::Button::left)) {
                 this->player->moveX(-this->playerSpeed * deltaTime);
-
+                float limit = - this->player->getCollider().width / 2;
+                if (this->player->getX() < limit)
+                    this->player->setPosition(limit, this->player->getY());
+            }
 
         /* UPDATE POSITION */
 
