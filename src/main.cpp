@@ -4,6 +4,7 @@
 #include "Loader.h"
 #include "Input.h"
 #include "Define.h"
+#include "Settings.h"
 
 #include <iostream>
 
@@ -15,6 +16,7 @@ int main()
     Game game(window, WIDTH, HEIGHT);
     Input input;
     sf::Clock clock;
+    Settings::get();
 
     while (window.isOpen()) {
         sf::Event event;
