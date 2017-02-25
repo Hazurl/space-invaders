@@ -2,9 +2,9 @@
 
 #include <iostream>
 
-SpaceShip::SpaceShip (std::string const& imgName, float x, float y) :
-    x(x), y(y) {
-        
+SpaceShip::SpaceShip (std::string const& imgName, float x, float y) {
+    this->collider.left = x;
+    this->collider.top = y;
     this->setSpriteFromFile(imgName);
 }
 
@@ -17,8 +17,8 @@ void SpaceShip::setSpriteFromFile(std::string const& imgName) {
 
     ImageSettings sett = Settings::get().getImageSettings(imgName);
 
-    this->size.x = sett.width;
-    this->size.y = sett.height;
+    this->collider.width = sett.width;
+    this->collider.height = sett.height;
 
     this->framesCount = sett.frame;
     this->currentFrame = 0;
@@ -36,11 +36,11 @@ void SpaceShip::update(float speed) {
 }
 
 void SpaceShip::moveX(float amount) {
-    this->x += amount;
+    this->collider.left += amount;
 }
 
 void SpaceShip::moveY(float amount) {
-    this->y += amount;
+    this->collider.top += amount;
 }
 
 void SpaceShip::invertX() {
@@ -48,27 +48,26 @@ void SpaceShip::invertX() {
 }
 
 void SpaceShip::setPosition (float x, float y) {
-    this->x = x;
-    this->y = y;
+    this->collider.left = x;
+    this->collider.top = y;
 }
 
-sf::IntRect SpaceShip::getCollider () {
-    sf::IntRect col(this->x, this->y, this->size.x, this->size.y);
-    return col;
+sf::FloatRect SpaceShip::getCollider () {
+    return this->collider;
 }
 
 void SpaceShip::draw (sf::RenderWindow* window) {
-    sf::Vector2i rectPos(this->size.x * this->currentFrame, 0);
-    sf::IntRect rect(rectPos, this->size);
+    sf::IntRect rect(sf::Vector2i(this->collider.width * this->currentFrame, 0), // pos
+                     sf::Vector2i(this->collider.width, this->collider.height)); // size
     sp.setTextureRect(rect);
-    this->sp.setPosition(this->x, this->y);
+    this->sp.setPosition(this->collider.left, this->collider.top);
     window->draw(this->sp);
 }
 
 float SpaceShip::getX() {
-    return this->x;
+    return this->collider.left;
 }
 
 float SpaceShip::getY() {
-    return this->y;
+    return this->collider.top;
 }

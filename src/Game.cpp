@@ -45,7 +45,7 @@ void Game::initialize () {
 
 void Game::update(Input input, long deltaTime) {
     switch (this->state) {
-        case State::PLAYING :
+        case State::PLAYING : {
 
         /* TICKS */
             this->ticksDeltaTime += deltaTime;
@@ -62,24 +62,23 @@ void Game::update(Input input, long deltaTime) {
 
             if (input.isJustPressed(Input::Button::pause))
                 this->setState(State::PAUSE);
-
             if (input.isPressed(Input::Button::right))
                 this->player->moveX(this->playerSpeed * deltaTime);
 
             if (input.isPressed(Input::Button::left))
                 this->player->moveX(-this->playerSpeed * deltaTime);
 
+
         /* UPDATE POSITION */
-            
-            for (int i = this->invaders.size() -1; i >= 0; --i)
-                this->invaders.at(i)->update(this->invadersXSpeed * deltaTime);
+
+            for (auto it = this->invaders.begin(); it != this->invaders.end(); ++it)
+                (*it)->update(this->invadersXSpeed * deltaTime);
                 
             if (this->invadersCollideWithBorders()) {
-                for (int i = this->invaders.size() -1; i >= 0; --i) {
-                    SpaceShip* inv = this->invaders.at(i);
-                    inv->invertX();
-                    inv->moveY(this->invadersYSpeed);
-                    inv->update(this->invadersXSpeed * deltaTime * 2);
+                for (auto inv = this->invaders.begin(); inv != this->invaders.end(); ++inv) {
+                    (*inv)->invertX();
+                    (*inv)->moveY(this->invadersYSpeed);
+                    (*inv)->update(this->invadersXSpeed * deltaTime * 2);
                 }
             }
 
@@ -91,7 +90,7 @@ void Game::update(Input input, long deltaTime) {
 
         break;
 
-        case State::PAUSE :
+        } case State::PAUSE :
             if (input.isJustPressed(Input::Button::pause))
                 this->setState(State::PLAYING);
         break;
@@ -107,7 +106,9 @@ void Game::fire_player() {
     if (this->playerBullet != nullptr)
         return;
 
-    this->playerBullet = new Bullet("shot.bmp", this->player->getX() + 16, this->player->getY());
+    this->playerBullet = new Bullet("shot.bmp", this->player->getX() 
+                                                - Settings::get().getImageSettings("shot.bmp").width / 2
+                                                + this->player->getCollider().width / 2, this->player->getY());
 }
 
 void Game::fire_invaders() {
@@ -150,7 +151,7 @@ void Game::draw () {
             float w = pause_text.getGlobalBounds().width;
 
             pause_text.setPosition(this->width / 2 - w / 2,
-                                         this->height * 0.7);
+                                   this->height * 0.7);
 
             this->window->draw(pause_text);
         break; }
@@ -178,7 +179,7 @@ void Game::setState(State st) {
     if (this->state == st)
         return;
 
-    if (st == State::PLAYING && this->state == State::MENU) {
+    if (st == State::PLAYING && this->state == State::MENU) { // passage du menu au jeu
         this->initialize();
     }
 
@@ -187,8 +188,8 @@ void Game::setState(State st) {
 }
 
 bool Game::invadersCollideWithBorders() {
-    for (int i = this->invaders.size() -1; i >= 0; --i) {
-        sf::IntRect collider = this->invaders.at(i)->getCollider();
+    for (auto inv = this->invaders.begin(); inv != this->invaders.end(); ++inv) {
+        sf::FloatRect collider = (*inv)->getCollider();
         if (collider.left < 0 || collider.left + collider.width > this->width) {
             return true;
         }

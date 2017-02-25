@@ -19,7 +19,7 @@ public :
     void invertX();
     void setPosition (float x, float y);
 
-    sf::IntRect getCollider ();
+    sf::FloatRect getCollider ();
 
     void setSpriteFromFile(std::string const& imgName);
     void nextFrame();
@@ -34,7 +34,8 @@ private :
     float y = 0;
     bool move_right = true;
 
-    sf::Vector2i size;
+    sf::FloatRect collider;
+
     unsigned int framesCount;
     unsigned int currentFrame;
 
