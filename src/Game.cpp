@@ -153,9 +153,10 @@ void Game::draw () {
         break;}
 
         case State::PAUSE : {
-            this->player->draw(this->window);
-            for (int i = this->invaders.size() -1; i >= 0; --i)
-                this->invaders.at(i)->draw(this->window);
+            // Draw game in background
+            this->state = State::PLAYING;
+            this->draw();
+            this->state = State::PAUSE;
 
             sf::Text pause_text;
             pause_text.setFont(this->main_font);
