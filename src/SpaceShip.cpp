@@ -52,6 +52,10 @@ void SpaceShip::setPosition (float x, float y) {
     this->collider.top = y;
 }
 
+void SpaceShip::setLife (unsigned int life) {
+    this->life = life;
+}
+
 sf::FloatRect SpaceShip::getCollider () {
     return this->collider;
 }
@@ -70,4 +74,8 @@ float SpaceShip::getX() {
 
 float SpaceShip::getY() {
     return this->collider.top;
+}
+
+unsigned int SpaceShip::getLife () {
+    return this->life;
 }

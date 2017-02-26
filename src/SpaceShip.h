@@ -17,7 +17,9 @@ public :
     void moveX(float amount);
     void moveY(float amount);
     void invertX();
+
     void setPosition (float x, float y);
+    void setLife (unsigned int life);
 
     sf::FloatRect getCollider ();
 
@@ -28,11 +30,14 @@ public :
 
     float getX();
     float getY();
+    unsigned int getLife();
 
 private :
     float x = 0;
     float y = 0;
     bool move_right = true;
+
+    unsigned int life = 1;
 
     sf::FloatRect collider;
 
