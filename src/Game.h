@@ -32,6 +32,7 @@ public :
 
 private :
     bool invadersCollideWithBorders();
+    sf::Text createText (std::string text, unsigned int size);
 
     sf::RenderWindow* window;
     float width;

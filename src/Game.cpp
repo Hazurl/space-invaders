@@ -158,11 +158,7 @@ void Game::draw () {
             this->draw();
             this->state = State::PAUSE;
 
-            sf::Text pause_text;
-            pause_text.setFont(this->main_font);
-            pause_text.setString("PAUSE");
-            pause_text.setCharacterSize(48);
-            pause_text.setColor(sf::Color::White);
+            sf::Text pause_text = this->createText("PAUSE", 48);
 
             float w = pause_text.getGlobalBounds().width;
 
@@ -175,11 +171,7 @@ void Game::draw () {
         case State::MENU : {
             this->window->draw(title);
 
-            sf::Text press_space_text;
-            press_space_text.setFont(this->main_font);
-            press_space_text.setString("Press SPACE to start");
-            press_space_text.setCharacterSize(32);
-            press_space_text.setColor(sf::Color::White);
+            sf::Text press_space_text = this->createText("Press SPACE to start", 32);
 
             float w = press_space_text.getGlobalBounds().width;
 
@@ -211,4 +203,14 @@ bool Game::invadersCollideWithBorders() {
         }
     }
     return false;
+}
+
+sf::Text Game::createText (std::string text, unsigned int size) {
+    sf::Text txt;
+    txt.setFont(this->main_font);
+    txt.setString(text);
+    txt.setCharacterSize(size);
+    txt.setColor(sf::Color::White);
+
+    return txt;
 }
