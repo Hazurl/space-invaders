@@ -4,33 +4,25 @@
 #include "../Utilities/Loader.h"
 #include "../Utilities/Define.h"
 #include "../Utilities/Settings.h"
+#include "GameObject.h"
 
 #include <string>
 #include <SFML/Graphics.hpp>
 
-class Bullet {
+class Bullet : public GameObject {
 public :
+/*              CONSTRUCTORS                                                    */
     Bullet (std::string const& path, float x = 0, float y = 0, bool move_down = false);
+
+/*              DESTRUCTOR                                                      */
     ~Bullet ();
 
+/*              UPDATE                                                          */
     void update (float speed);
-    void setSpriteFromFile(std::string const& path);
-
-    sf::IntRect getCollider ();
-
     void draw(sf::RenderWindow* window);
 
 private :
-    float x;
-    float y;
-
     bool move_down;
-
-    sf::Vector2i size;
-    unsigned int framesCount;
-    unsigned int currentFrame;
-
-    sf::Sprite sp;
 };
 
 #endif
