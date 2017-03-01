@@ -192,7 +192,6 @@ void Game::setState(State st) {
     }
 
     this->state = st;
-    //std::cout << "Changement d'état en " << (st == State::PAUSE ? "Pause" : st == State::PLAYING ? "Playing" : "Menu") << std::endl;
 }
 
 bool Game::invadersCollideWithBorders() {
