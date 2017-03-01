@@ -44,8 +44,8 @@ void GameObject::nextFrame() {
 
 void GameObject::draw (sf::RenderWindow* window) {
     // Place the rect on the right position to find the correct frame
-    sf::IntRect rect(sf::Vector2i(this->getWidth() * this->currentFrame, 0), // pos
-                     sf::Vector2i(this->getWidth(), this->getHeight())); // size
+    sf::IntRect rect(this->getWidth() * this->currentFrame, 0,  // pos
+                     this->getWidth(), this->getHeight()     ); // size
 
     // Set the frame from the texture
     sp.setTextureRect(rect);
