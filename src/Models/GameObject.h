@@ -17,9 +17,10 @@ public:
 /*              DRAW                                                            */
     void            setSpriteFromFile(std::string const& imgName);
     void            nextFrame();
+    void            draw (sf::RenderWindow* window);
 
+/*              UPDATE                                                          */
     virtual void    update(float speed) = 0;
-    virtual void    draw (sf::RenderWindow* window);
 
 /*              GETTER                                                          */
     float           getX();
@@ -27,10 +28,12 @@ public:
     int             getWidth();
     int             getHeight();
     sf::FloatRect   getCollider ();
+    float           getRotation();
 
 protected:
     sf::Sprite      sp;
     sf::FloatRect   collider;
+    float           rotation = 0;
 
     unsigned int    framesCount;
     unsigned int    currentFrame;

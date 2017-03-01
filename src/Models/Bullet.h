@@ -19,7 +19,6 @@ public :
 
 /*              UPDATE                                                          */
     void update (float speed);
-    void draw(sf::RenderWindow* window);
 
 private :
     bool move_down;

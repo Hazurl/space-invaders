@@ -50,8 +50,12 @@ void GameObject::draw (sf::RenderWindow* window) {
     // Set the frame from the texture
     sp.setTextureRect(rect);
 
-    // Set the sprite at the the right position
+    // Position
     this->sp.setPosition(this->getX(), this->getY());
+
+    // Rotation
+    this->sp.setOrigin(this->getWidth() / 2, this->getHeight() / 2);
+    this->sp.setRotation(this->getRotation());
 
     // Draw it finally
     window->draw(this->sp);
