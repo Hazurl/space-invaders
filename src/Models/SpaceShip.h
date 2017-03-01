@@ -1,9 +1,9 @@
 #ifndef __SPACESHIP_H__
 #define __SPACESHIP_H__
 
-#include "Loader.h"
-#include "Define.h"
-#include "Settings.h"
+#include "../Utilities/Loader.h"
+#include "../Utilities/Define.h"
+#include "../Utilities/Settings.h"
 
 #include <string>
 #include <SFML/Graphics.hpp>

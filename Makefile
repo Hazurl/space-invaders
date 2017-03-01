@@ -1,4 +1,4 @@
-SRC_DIR := src
+SRC_DIR := src/Utilities src/Models src/Game src
 
 SRC := $(foreach d,$(SRC_DIR),$(wildcard $(d)/*.cpp))
 

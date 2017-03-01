@@ -1,11 +1,11 @@
 #ifndef __GAME_H__
 #define __GAME_H__
 
-#include "SpaceShip.h"
-#include "Loader.h"
+#include "../Models/SpaceShip.h"
+#include "../Utilities/Loader.h"
 #include "Input.h"
-#include "Bullet.h"
-#include "Define.h"
+#include "../Models/Bullet.h"
+#include "../Utilities/Define.h"
 
 #include <SFML/Graphics.hpp>
 #include <vector>

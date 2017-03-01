@@ -1,10 +1,10 @@
 #include <SFML/Graphics.hpp>
 
-#include "Game.h"
-#include "Loader.h"
-#include "Input.h"
-#include "Define.h"
-#include "Settings.h"
+#include "Game/Game.h"
+#include "Utilities/Loader.h"
+#include "Game/Input.h"
+#include "Utilities/Define.h"
+#include "Utilities/Settings.h"
 
 #include <iostream>
 
