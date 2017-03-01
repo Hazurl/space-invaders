@@ -9,7 +9,7 @@
 class GameObject {
 public: 
 /*              CONSTRUCTORS                                                    */
-                    GameObject(std::string const& imgName);
+                    GameObject(std::string const& imgName, float x = 0.0, float y = 0.0);
 
 /*              DESTRUCTOR                                                      */
     virtual         ~GameObject();

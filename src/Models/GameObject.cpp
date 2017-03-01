@@ -7,7 +7,7 @@
 */
 
 GameObject::GameObject(std::string const& imgName, float x, float y) 
-    : this->collider(sf::FloatRect(x, y, 0, 0)) {
+    : collider(sf::FloatRect(x, y, 0, 0)) {
     
     this->setSpriteFromFile(imgName);
 }
