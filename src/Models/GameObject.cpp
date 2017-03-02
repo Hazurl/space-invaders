@@ -83,6 +83,10 @@ int GameObject::getHeight() {
     return this->collider.height;
 }
 
+float GameObject::getRotation() {
+    return this->rotation;
+}
+
 sf::FloatRect GameObject::getCollider () {
     return this->collider;
 }
