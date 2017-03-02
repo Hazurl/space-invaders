@@ -22,6 +22,9 @@ public:
 /*              UPDATE                                                          */
     virtual void    update(float speed) = 0;
 
+/*              COLLISISON                                                      */
+    bool            collideWith(GameObject* gm);
+
 /*              GETTER                                                          */
     float           getX();
     float           getY();

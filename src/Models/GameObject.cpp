@@ -63,6 +63,21 @@ void GameObject::draw (sf::RenderWindow* window) {
 
 /*
    ============================ 
+   ======== COLLISISON ======== 
+   ============================ 
+*/
+
+bool GameObject::collideWith(GameObject* gm) {
+    sf::FloatRect coll = gm->getCollider();
+
+    return coll.top < this->collider.top + this->collider.height
+        && coll.left < this->collider.left + this->collider.width
+        && this->collider.top < coll.top + coll.height
+        && this->collider.top < coll.top + coll.height;
+}
+
+/*
+   ============================ 
    ========== GETTER ========== 
    ============================ 
 */
