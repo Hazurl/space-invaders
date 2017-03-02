@@ -39,7 +39,7 @@ void GameObject::setSpriteFromFile(std::string const& imgName) {
 }
 
 void GameObject::nextFrame() {
-    this->currentFrame = (++this->currentFrame) % this->framesCount;
+    this->currentFrame = (this->currentFrame + 1) % this->framesCount;
 }
 
 void GameObject::draw (sf::RenderWindow* window) {
