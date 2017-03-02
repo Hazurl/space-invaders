@@ -42,11 +42,11 @@ void Game::initialize () {
     this->player = new SpaceShip("player_0.bmp", this->width / 2, this->height - PLAYER_POS_Y_OFFSET);
     for (int i = 1; i < 12; ++i) {
         float posX = SPACE_BETWEEN_INV_X * i;
-        this->invaders.push_back(new SpaceShip("inv_a.bmp", posX, INV_POS_Y)); // rangé du fond
-        this->invaders.push_back(new SpaceShip("inv_b.bmp", posX, INV_POS_Y + SPACE_BETWEEN_INV_Y)); // rangé du milieu
-        this->invaders.push_back(new SpaceShip("inv_b.bmp", posX, INV_POS_Y + SPACE_BETWEEN_INV_Y * 2)); // de meme
-        this->invaders.push_back(new SpaceShip("inv_c.bmp", posX, INV_POS_Y + SPACE_BETWEEN_INV_Y * 3)); // seconde rangé
-        this->invaders.push_back(new SpaceShip("inv_c.bmp", posX, INV_POS_Y + SPACE_BETWEEN_INV_Y * 4)); // première rangé
+        this->invaders.push_back(new SpaceShip("inv_a.bmp", posX, INV_POS_Y                          ) ); // rangé du fond
+        this->invaders.push_back(new SpaceShip("inv_b.bmp", posX, INV_POS_Y + SPACE_BETWEEN_INV_Y    ) ); // rangé du milieu
+        this->invaders.push_back(new SpaceShip("inv_b.bmp", posX, INV_POS_Y + SPACE_BETWEEN_INV_Y * 2) ); // de meme
+        this->invaders.push_back(new SpaceShip("inv_c.bmp", posX, INV_POS_Y + SPACE_BETWEEN_INV_Y * 3) ); // seconde rangé
+        this->invaders.push_back(new SpaceShip("inv_c.bmp", posX, INV_POS_Y + SPACE_BETWEEN_INV_Y * 4) ); // première rangé
     }
 }
 
@@ -97,8 +97,14 @@ void Game::update(Input input, long deltaTime) {
                 }
             }
 
-            if (this->playerBullet)
+            if (this->playerBullet) {
                 this->playerBullet->update(bulletSpeed * deltaTime);
+                GameObject* inv;
+                if ( (inv = this->collideWithInvaders(playerBullet)) != nullptr) {
+                    delete playerBullet;
+                    playerBullet = nullptr;
+                }
+            }
 
             if (this->invBullet)
                 this->invBullet->update(bulletSpeed * deltaTime);
@@ -212,4 +218,12 @@ sf::Text Game::createText (std::string text, unsigned int size) {
     txt.setColor(sf::Color::White);
 
     return txt;
+}
+
+GameObject* Game::collideWithInvaders(GameObject* gm) {
+    for (auto it = this->invaders.begin(); it != this->invaders.end(); ++it)
+        if (gm->collideWith(*it))
+            return *it;
+
+    return nullptr;
 }

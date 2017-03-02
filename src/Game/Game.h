@@ -32,6 +32,7 @@ public :
 
 private :
     bool invadersCollideWithBorders();
+    GameObject* collideWithInvaders(GameObject* gm);
     sf::Text createText (std::string text, unsigned int size);
 
     sf::RenderWindow* window;
