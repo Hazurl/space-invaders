@@ -45,6 +45,14 @@ void SpaceShip::invertX() {
     this->move_right = !(this->move_right);
 }
 
+void SpaceShip::hit(int damage) {
+    this->life -= damage; 
+}
+
+bool SpaceShip::isDead() {
+    return this->life <= 0;
+}
+
 /*
    ============================ 
    ========== SETTER ========== 
@@ -56,7 +64,7 @@ void SpaceShip::setPosition (float x, float y) {
     this->collider.top = y;
 }
 
-void SpaceShip::setLife (unsigned int life) {
+void SpaceShip::setLife (int life) {
     this->life = life;
 }
 
@@ -66,6 +74,6 @@ void SpaceShip::setLife (unsigned int life) {
    ============================ 
 */
 
-unsigned int SpaceShip::getLife () {
+int SpaceShip::getLife () {
     return this->life;
 }

@@ -19,20 +19,23 @@ public :
 
 /*              UPDATE                                                          */
     void update(float speed);
+
     void moveX(float amount);
     void moveY(float amount);
     void invertX();
+    void hit(int damage);
+    bool isDead();
 
 /*              SETTER                                                          */
     void setPosition (float x, float y);
-    void setLife (unsigned int life);
+    void setLife (int life);
 
 /*              GETTER                                                          */
-    unsigned int getLife();
+    int getLife();
 
 private :
     bool move_right = true;
-    unsigned int life = 1;
+    int life = 1;
 };
 
 #endif
