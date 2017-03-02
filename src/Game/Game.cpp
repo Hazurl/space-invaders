@@ -99,10 +99,16 @@ void Game::update(Input input, long deltaTime) {
 
             if (this->playerBullet) {
                 this->playerBullet->update(bulletSpeed * deltaTime);
-                GameObject* inv;
-                if ( (inv = this->collideWithInvaders(playerBullet)) != nullptr) {
+                auto inv = this->collideWithInvaders(playerBullet);
+                if (inv != this->invaders.end()) {
                     delete playerBullet;
                     playerBullet = nullptr;
+
+                    (*inv)->hit(1);
+                    if ((*inv)->isDead()) {
+                        delete *inv;
+                        this->invaders.erase(inv);
+                    }
                 }
             }
 
@@ -220,10 +226,10 @@ sf::Text Game::createText (std::string text, unsigned int size) {
     return txt;
 }
 
-GameObject* Game::collideWithInvaders(GameObject* gm) {
+std::vector<SpaceShip*>::iterator Game::collideWithInvaders(GameObject* gm) {
     for (auto it = this->invaders.begin(); it != this->invaders.end(); ++it)
         if (gm->collideWith(*it))
-            return *it;
+            return it;
 
-    return nullptr;
+    return this->invaders.end();
 }
