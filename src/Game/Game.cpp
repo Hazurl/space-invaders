@@ -50,7 +50,7 @@ void Game::initialize () {
     }
 }
 
-void Game::update(Input input, long deltaTime) {
+void Game::update(long deltaTime) {
     switch (this->state) {
         case State::PLAYING : {
 
@@ -63,7 +63,7 @@ void Game::update(Input input, long deltaTime) {
             }
 
         /* INPUT */
-
+/*
             if (input.isJustPressed(Input::Button::fire))
                 this->fire_player();                
 
@@ -83,7 +83,7 @@ void Game::update(Input input, long deltaTime) {
                 if (this->player->getX() < limit)
                     this->player->setPosition(limit, this->player->getY());
             }
-
+*/
         /* UPDATE POSITION */
 
             for (auto it = this->invaders.begin(); it != this->invaders.end(); ++it)
@@ -118,12 +118,12 @@ void Game::update(Input input, long deltaTime) {
         break;
 
         } case State::PAUSE :
-            if (input.isJustPressed(Input::Button::pause))
+            if (Input::get().isJustPressed(Input::Button::pause))
                 this->setState(State::PLAYING);
         break;
 
         case State::MENU :
-            if (input.isJustPressed(Input::Button::start))
+            if (Input::get().isJustPressed(Input::Button::start))
                 this->setState(State::PLAYING);
         break; 
     }

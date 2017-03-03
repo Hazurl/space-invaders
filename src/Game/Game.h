@@ -21,7 +21,7 @@ public :
 
     void initialize();
 
-    void update(Input input, long deltaTime);
+    void update(long deltaTime);
     void fire_player ();
     void fire_invaders ();
     void nextGameTick ();

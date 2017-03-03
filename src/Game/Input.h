@@ -5,7 +5,7 @@
 #include <SFML/Graphics.hpp>
 
 class Input {
-public :
+public:
     enum class Button {
         up,
         down,
@@ -16,9 +16,6 @@ public :
         start
     };
 
-    Input ();
-    ~Input ();
-
     void updateButtons ();
     void updateButton (Button but);
 
@@ -26,7 +23,13 @@ public :
     bool isJustPressed (Input::Button but);
     bool isReleased (Input::Button but);
 
-private :
+    Input(Input const&)                         = delete;
+    void operator=(Input const&)                = delete;
+    static Input& get();
+
+private:
+    Input();
+    ~Input();
 
     std::map<Input::Button, bool> lastButtonMap;
     std::map<Input::Button, bool> buttonMap;

@@ -14,7 +14,6 @@ int main()
     window.setFramerateLimit(60);
 
     Game game(window, WIDTH, HEIGHT);
-    Input input;
     sf::Clock clock;
     Settings::get();
 
@@ -25,9 +24,9 @@ int main()
                 window.close();
         }
 
-        input.updateButtons();
+        Input::get().updateButtons();
 
-        game.update(input, (long)clock.restart().asMilliseconds() * SPEED);
+        game.update((long)clock.restart().asMilliseconds() * SPEED);
 
         window.clear();
 

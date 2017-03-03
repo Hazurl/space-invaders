@@ -1,5 +1,10 @@
 #include "Input.h"
 
+Input& Input::get() {
+    static Input instance;
+    return instance;
+}
+
 Input::Input () {
     this->keysMap[Button::up]            = { sf::Keyboard::Key::Up };
     this->keysMap[Button::down]          = { sf::Keyboard::Key::Down };
@@ -18,9 +23,7 @@ Input::Input () {
     this->buttonMap[Button::start]      = this->lastButtonMap[Button::start]  = false;
 }
 
-Input::~Input () {
-
-}
+Input::~Input () {}
 
 void Input::updateButtons () {
     this->updateButton(Button::up);
