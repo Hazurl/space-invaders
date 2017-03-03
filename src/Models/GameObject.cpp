@@ -36,6 +36,8 @@ void GameObject::setSpriteFromFile(std::string const& imgName) {
 
     this->framesCount = sett.frame;
     this->currentFrame = 0;
+
+    this->sp.setOrigin(this->getWidth() / 2, this->getHeight() / 2);
 }
 
 void GameObject::nextFrame() {
@@ -51,14 +53,23 @@ void GameObject::draw (sf::RenderWindow* window) {
     sp.setTextureRect(rect);
 
     // Position
-    this->sp.setPosition(this->getX(), this->getY());
+    this->sp.setPosition(this->getX() + this->getWidth() / 2, this->getY()+ this->getHeight() / 2);
 
     // Rotation
-    this->sp.setOrigin(this->getWidth() / 2, this->getHeight() / 2);
     this->sp.setRotation(this->getRotation());
 
     // Draw it finally
     window->draw(this->sp);
+
+#ifdef DEBUG
+    sf::RectangleShape colliderShape(sf::Vector2f(this->getWidth(), this->getHeight()));
+    colliderShape.setPosition(this->getX(), this->getY());
+    colliderShape.setFillColor(sf::Color(0, 0, 0, 0));
+    colliderShape.setOutlineColor(sf::Color(0, 255, 0));
+    colliderShape.setOutlineThickness(1);
+
+    window->draw(colliderShape);
+#endif
 }
 
 /*
@@ -73,7 +84,7 @@ bool GameObject::collideWith(GameObject* gm) {
     return coll.top < this->collider.top + this->collider.height
         && coll.left < this->collider.left + this->collider.width
         && this->collider.top < coll.top + coll.height
-        && this->collider.top < coll.top + coll.height;
+        && this->collider.left < coll.left + coll.width;
 }
 
 /*

@@ -5,6 +5,7 @@
 #include <string>
 #include "../Utilities/Loader.h"
 #include "../Utilities/Settings.h"
+#include "../Utilities/Define.h"
 
 class GameObject {
 public: 
