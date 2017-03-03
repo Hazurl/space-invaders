@@ -1,6 +1,8 @@
 #ifndef __DEFINE_H__
 #define __DEFINE_H__
 
+//#define DEBUG
+
 #define WIDTH 500
 #define HEIGHT 600
 #define SPEED 1
