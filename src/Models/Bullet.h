@@ -18,7 +18,7 @@ public :
     ~Bullet ();
 
 /*              UPDATE                                                          */
-    void update (float speed);
+    void update (float speed, sf::IntRect screenInnerCollider);
 
 private :
     bool move_down;

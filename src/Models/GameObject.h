@@ -21,7 +21,7 @@ public:
     void            draw (sf::RenderWindow* window);
 
 /*              UPDATE                                                          */
-    virtual void    update(float speed) = 0;
+    virtual void    update(float speed, sf::IntRect screenInnerCollider) = 0;
 
 /*              COLLISISON                                                      */
     bool            collideWith(GameObject* gm);

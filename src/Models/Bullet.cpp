@@ -28,7 +28,7 @@ Bullet::~Bullet () {}
    ============================ 
 */
 
-void Bullet::update (float speed) {
+void Bullet::update (float speed), sf::IntRect screenInnerCollider {
     if (move_down)
         this->collider.top += speed;
     else
