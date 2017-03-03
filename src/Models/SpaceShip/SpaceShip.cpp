@@ -42,6 +42,10 @@ void SpaceShip::setLife (int life) {
     this->life = life;
 }
 
+void SpaceShip::setSpeed (float speed) {
+    this->speed = speed;
+}
+
 /*
    ============================ 
    ========== GETTER ========== 
@@ -50,4 +54,8 @@ void SpaceShip::setLife (int life) {
 
 int SpaceShip::getLife () {
     return this->life;
+}
+
+int SpaceShip::getSpeed () {
+    return this->speed;
 }

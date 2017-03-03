@@ -63,27 +63,9 @@ void Game::update(long deltaTime) {
             }
 
         /* INPUT */
-/*
-            if (input.isJustPressed(Input::Button::fire))
-                this->fire_player();                
-
             if (input.isJustPressed(Input::Button::pause))
                 this->setState(State::PAUSE);
 
-            if (input.isPressed(Input::Button::right)) {
-                this->player->moveX(this->playerSpeed * deltaTime);
-                float limit = this->width - this->player->getCollider().width / 2;
-                if (this->player->getX() > limit)
-                    this->player->setPosition(limit, this->player->getY());
-            }
-
-            if (input.isPressed(Input::Button::left)) {
-                this->player->moveX(-this->playerSpeed * deltaTime);
-                float limit = - this->player->getCollider().width / 2;
-                if (this->player->getX() < limit)
-                    this->player->setPosition(limit, this->player->getY());
-            }
-*/
         /* UPDATE POSITION */
 
             for (auto it = this->invaders.begin(); it != this->invaders.end(); ++it)
@@ -127,15 +109,6 @@ void Game::update(long deltaTime) {
                 this->setState(State::PLAYING);
         break; 
     }
-}
-
-void Game::fire_player() {
-    if (this->playerBullet != nullptr)
-        return;
-
-    this->playerBullet = new Bullet("shot.bmp", this->player->getX() 
-                                                - Settings::get().getImageSettings("shot.bmp").width / 2
-                                                + this->player->getCollider().width / 2, this->player->getY());
 }
 
 void Game::fire_invaders() {

@@ -1,7 +1,7 @@
 #ifndef __GAME_H__
 #define __GAME_H__
 
-#include "../Models/SpaceShip.h"
+#include "../Models/SpaceShip/SpaceShip.h"
 #include "../Utilities/Loader.h"
 #include "Input.h"
 #include "../Models/Bullet.h"
@@ -22,7 +22,6 @@ public :
     void initialize();
 
     void update(long deltaTime);
-    void fire_player ();
     void fire_invaders ();
     void nextGameTick ();
 
@@ -51,7 +50,6 @@ private :
     unsigned long ticksDeltaTime = 0;
 
     SpaceShip* player;
-    Bullet* playerBullet;
     
     std::vector<SpaceShip* > invaders;
     Bullet* invBullet;

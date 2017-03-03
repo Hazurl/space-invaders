@@ -1,30 +1,28 @@
-#ifndef __SPACESHIP_H__
-#define __SPACESHIP_H__
+#ifndef __INVADER_H__
+#define __INVADER_H__
 
-#include "GameObject.h"
-
+#include "../GameObject.h"
+#include "SpaceShip.h"
 #include <string>
+#include <SFML/Graphics.hpp>
 
-class SpaceShip : public GameObject {
-public :
+class Invader : public SpaceShip {
+public:
 /*              CONSTRUCTORS                                                    */
-    SpaceShip (std::string const& imgName, float x = 0.0, float y = 0.0, int life = 0);
+                    Invader (std::string const& imgName, float x = 0.0, float y = 0.0, int life = 0, float speed = 1.0);
 
 /*              DESTRUCTOR                                                      */
-    ~SpaceShip();
+                    ~Invader ();
 
 /*              UPDATE                                                          */
-    void hit(int damage);
-    bool isDead();
+    void            update (float speed, sf::IntRect screenInnerCollider);
 
 /*              SETTER                                                          */
-    void setLife (int life);
 
 /*              GETTER                                                          */
-    int getLife();
 
-private :
-    int life = 1;
+private:
+    bool            move_right = true;
 };
 
 #endif
