@@ -22,7 +22,7 @@ public :
     void initialize();
 
     void update(long deltaTime);
-    void fire_invaders ();
+    //void fire_invaders ();
     void nextGameTick ();
 
     void draw();
@@ -30,8 +30,8 @@ public :
     void setState(State st);
 
 private :
-    bool invadersCollideWithBorders();
-    std::vector<SpaceShip*>::iterator collideWithInvaders(GameObject* gm);
+    //bool invadersCollideWithBorders();
+    //std::vector<SpaceShip*>::iterator collideWithInvaders(GameObject* gm);
     sf::Text createText (std::string text, unsigned int size);
 
     sf::RenderWindow* window;
@@ -39,20 +39,21 @@ private :
     float height;
 
     unsigned int score;
-    unsigned int life;
+    //unsigned int life;
 
-    float invadersXSpeed = 0.1;
-    float invadersYSpeed = 5;
-    float playerSpeed = 0.3;
-    float bulletSpeed = 0.2;
+    //float invadersXSpeed = 0.1;
+    //float invadersYSpeed = 5;
+    //float playerSpeed = 0.3;
+    //float bulletSpeed = 0.2;
 
     unsigned long ticks = 0;
     unsigned long ticksDeltaTime = 0;
 
     SpaceShip* player;
+    InvadersManager invManager;
     
-    std::vector<SpaceShip* > invaders;
-    Bullet* invBullet;
+    //std::vector<SpaceShip* > invaders;
+    //Bullet* invBullet;
 
     State state;
 

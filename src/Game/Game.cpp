@@ -22,28 +22,15 @@ Game::Game(sf::RenderWindow & window, unsigned int width, unsigned int height) :
 Game::~Game () {
     if (this->player)
         delete this->player;
-
-    while (!this->invaders.empty()) {
-        delete this->invaders.back();
-        this->invaders.pop_back();
-    }
 }
 
 void Game::initialize () {
     this->score = 0;
-    this->life = 3;
-
     this->ticks = 0;
 
     this->player = new SpaceShip("player_0.bmp", this->width / 2, this->height - PLAYER_POS_Y_OFFSET);
-    for (int i = 1; i < 12; ++i) {
-        float posX = SPACE_BETWEEN_INV_X * i;
-        this->invaders.push_back(new SpaceShip("inv_a.bmp", posX, INV_POS_Y                          ) ); // rangé du fond
-        this->invaders.push_back(new SpaceShip("inv_b.bmp", posX, INV_POS_Y + SPACE_BETWEEN_INV_Y    ) ); // rangé du milieu
-        this->invaders.push_back(new SpaceShip("inv_b.bmp", posX, INV_POS_Y + SPACE_BETWEEN_INV_Y * 2) ); // de meme
-        this->invaders.push_back(new SpaceShip("inv_c.bmp", posX, INV_POS_Y + SPACE_BETWEEN_INV_Y * 3) ); // seconde rangé
-        this->invaders.push_back(new SpaceShip("inv_c.bmp", posX, INV_POS_Y + SPACE_BETWEEN_INV_Y * 4) ); // première rangé
-    }
+    
+    this->invManager.Init(11, DEFAULT_INV_PATTERN);
 }
 
 void Game::update(long deltaTime) {
@@ -63,17 +50,6 @@ void Game::update(long deltaTime) {
                 this->setState(State::PAUSE);
 
         /* UPDATE POSITION */
-
-            for (auto it = this->invaders.begin(); it != this->invaders.end(); ++it)
-                (*it)->update(this->invadersXSpeed * deltaTime);
-                
-            if (this->invadersCollideWithBorders()) {
-                for (auto inv = this->invaders.begin(); inv != this->invaders.end(); ++inv) {
-                    (*inv)->invertX();
-                    (*inv)->moveY(this->invadersYSpeed);
-                    (*inv)->update(this->invadersXSpeed * deltaTime * 2);
-                }
-            }
 
             if (this->playerBullet) {
                 this->playerBullet->update(bulletSpeed * deltaTime);
@@ -107,24 +83,16 @@ void Game::update(long deltaTime) {
     }
 }
 
-void Game::fire_invaders() {
-
-}
-
 void Game::nextGameTick () {
     this->ticks++;
-
-    // SpaceShip Animation
-    for (int i = this->invaders.size() -1; i >= 0; --i)
-        this->invaders.at(i)->nextFrame();
+    this->invManager.onTick();
 }
 
 void Game::draw () {
     switch (this->state) {
         case State::PLAYING : {
             this->player->draw(this->window);
-            for (int i = this->invaders.size() -1; i >= 0; --i)
-                this->invaders.at(i)->draw(this->window);
+            this->invManager.draw(this->window);
 
             if (this->playerBullet)
                 this->playerBullet->draw(this->window);
@@ -175,16 +143,6 @@ void Game::setState(State st) {
     this->state = st;
 }
 
-bool Game::invadersCollideWithBorders() {
-    for (auto inv = this->invaders.begin(); inv != this->invaders.end(); ++inv) {
-        sf::FloatRect collider = (*inv)->getCollider();
-        if (collider.left < 0 || collider.left + collider.width > this->width) {
-            return true;
-        }
-    }
-    return false;
-}
-
 sf::Text Game::createText (std::string text, unsigned int size) {
     sf::Text txt;
     txt.setFont(this->main_font);
@@ -195,10 +153,3 @@ sf::Text Game::createText (std::string text, unsigned int size) {
     return txt;
 }
 
-std::vector<SpaceShip*>::iterator Game::collideWithInvaders(GameObject* gm) {
-    for (auto it = this->invaders.begin(); it != this->invaders.end(); ++it)
-        if (gm->collideWith(*it))
-            return it;
-
-    return this->invaders.end();
-}

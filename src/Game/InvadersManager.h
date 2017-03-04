@@ -24,10 +24,13 @@ public:
 
     void draw (sf::RenderWindow* window);
 
+    std::vector<Invaders*>::iterator collideWithInvaders(GameObject* gm);
+
 private:
     std::vector<Invader* > invaders;
 
     void deleteInvaders();
+    bool invadersCollideWithBorders(sf::IntRect screenInnerCollider);
 };
 
 #endif
