@@ -17,7 +17,7 @@ void InvadersManager::Init(unsigned int invColumns, std::string pattern) {
         float posX = 0;
         for (int i = invColumns - 1; i >= 0; --i) {
             this->invaders.push_back(
-                new SpaceShip("inv_a.bmp", posX, posY)
+                new SpaceShip(imgName, posX, posY)
             );
 
             posX += SPACE_BETWEEN_INV_X;
