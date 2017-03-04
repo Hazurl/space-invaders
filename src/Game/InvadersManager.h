@@ -2,6 +2,7 @@
 #define __INVADERS_MANAGER_H__
 
 #include <vector>
+#include <string>
 #include <SFML/Graphics.hpp>
 #include "../Utilities/Define.h"
 #include "../Utilities/Settings.h"
@@ -24,7 +25,7 @@ public:
 
     void draw (sf::RenderWindow* window);
 
-    std::vector<Invaders*>::iterator collideWithInvaders(GameObject* gm);
+    std::vector<Invader*>::iterator collideWithInvaders(GameObject* gm);
 
 private:
     std::vector<Invader* > invaders;

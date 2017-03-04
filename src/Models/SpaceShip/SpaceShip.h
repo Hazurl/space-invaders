@@ -1,7 +1,7 @@
 #ifndef __SPACESHIP_H__
 #define __SPACESHIP_H__
 
-#include "GameObject.h"
+#include "../GameObject.h"
 
 #include <string>
 
@@ -25,7 +25,7 @@ public :
     int getLife();
     float getSpeed();
 
-private :
+protected :
     int life = 1;
     float speed;
 };

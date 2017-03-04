@@ -2,10 +2,12 @@
 #define __GAME_H__
 
 #include "../Models/SpaceShip/SpaceShip.h"
-#include "../Utilities/Loader.h"
-#include "Input.h"
+#include "../Models/SpaceShip/Player.h"
 #include "../Models/Bullet.h"
+#include "../Utilities/Loader.h"
 #include "../Utilities/Define.h"
+#include "Input.h"
+#include "InvadersManager.h"
 
 #include <SFML/Graphics.hpp>
 #include <vector>
@@ -49,7 +51,7 @@ private :
     unsigned long ticks = 0;
     unsigned long ticksDeltaTime = 0;
 
-    SpaceShip* player;
+    Player* player;
     InvadersManager invManager;
     
     //std::vector<SpaceShip* > invaders;

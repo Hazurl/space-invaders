@@ -6,8 +6,8 @@
    ============================ 
 */
 
-SpaceShip::SpaceShip (std::string const& imgName, float x, float y, int life) 
-    : GameObject(imgName, x, y), life(life) {
+SpaceShip::SpaceShip (std::string const& imgName, float x, float y, int life, float speed) 
+    : GameObject(imgName, x, y), life(life), speed(speed) {
 }
 
 /*
@@ -56,6 +56,6 @@ int SpaceShip::getLife () {
     return this->life;
 }
 
-int SpaceShip::getSpeed () {
+float SpaceShip::getSpeed () {
     return this->speed;
 }

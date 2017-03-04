@@ -1,5 +1,9 @@
+#ifndef __PLAYER_H__
+#define __PLAYER_H__
+
 #include "SpaceShip.h"
 #include "../Bullet.h"
+#include "../../Game/Input.h"
 #include <string>
 #include <SFML/Graphics.hpp>
 
@@ -12,7 +16,7 @@ public:
                     ~Player ();
 
 /*              UPDATE                                                          */
-    void            update (float speed, sf::IntRect screenInnerCollider);
+    void            update (float deltaTime, sf::IntRect screenInnerCollider);
 
 /*              SETTER                                                          */
 

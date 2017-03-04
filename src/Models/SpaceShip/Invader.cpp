@@ -5,6 +5,6 @@ Invader::Invader (std::string const& imgName, float x, float y, int life, float 
 
 Invader::~Invader() {}
 
-Invader::update(float speed, sf::IntRect screenInnerCollider) {
+void Invader::update(float speed, sf::IntRect screenInnerCollider) {
 
 }

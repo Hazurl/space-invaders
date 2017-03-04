@@ -5,7 +5,7 @@
 #define PLAYER_POS_Y_OFFSET 100
 
 Game::Game(sf::RenderWindow & window, unsigned int width, unsigned int height) :
-    window(&window), width(width), height(height), player(nullptr), playerBullet(nullptr), invBullet(nullptr), state(State::MENU) {
+    window(&window), width(width), height(height)/*, player(nullptr), playerBullet(nullptr), invBullet(nullptr)*/, state(State::MENU) {
 
     // Font
     if (!this->main_font.loadFromFile(FONT_PATH("pixelmix/pixelmix.ttf"))) {
@@ -28,7 +28,7 @@ void Game::initialize () {
     this->score = 0;
     this->ticks = 0;
 
-    this->player = new SpaceShip("player_0.bmp", this->width / 2, this->height - PLAYER_POS_Y_OFFSET);
+    this->player = new Player("player_0.bmp", this->width / 2, this->height - PLAYER_POS_Y_OFFSET);
     
     this->invManager.Init(11, DEFAULT_INV_PATTERN);
 }
@@ -46,11 +46,11 @@ void Game::update(long deltaTime) {
             }
 
         /* INPUT */
-            if (input.isJustPressed(Input::Button::pause))
+            if (Input::get().isJustPressed(Input::Button::pause))
                 this->setState(State::PAUSE);
 
         /* UPDATE POSITION */
-
+/*
             if (this->playerBullet) {
                 this->playerBullet->update(bulletSpeed * deltaTime);
                 auto inv = this->collideWithInvaders(playerBullet);
@@ -68,7 +68,7 @@ void Game::update(long deltaTime) {
 
             if (this->invBullet)
                 this->invBullet->update(bulletSpeed * deltaTime);
-
+*/
         break;
 
         } case State::PAUSE :
@@ -91,14 +91,14 @@ void Game::nextGameTick () {
 void Game::draw () {
     switch (this->state) {
         case State::PLAYING : {
-            this->player->draw(this->window);
+/*            this->player->draw(this->window);
             this->invManager.draw(this->window);
 
             if (this->playerBullet)
                 this->playerBullet->draw(this->window);
 
             if (this->invBullet)
-                this->invBullet->draw(this->window);
+                this->invBullet->draw(this->window);*/
         break;}
 
         case State::PAUSE : {

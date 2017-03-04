@@ -11,13 +11,13 @@ void InvadersManager::Init(unsigned int invColumns, std::string pattern) {
 
     float posY = INV_POS_Y;
 
-    for(char& c : str) {
-        std:string imgName = Settings::getImageForPattern(c);
+    for(char& c : pattern) {
+        std::string imgName = Settings::get().getImageForPattern(c);
 
         float posX = 0;
         for (int i = invColumns - 1; i >= 0; --i) {
             this->invaders.push_back(
-                new SpaceShip(imgName, posX, posY)
+                new Invader(imgName, posX, posY)
             );
 
             posX += SPACE_BETWEEN_INV_X;
@@ -33,8 +33,8 @@ void InvadersManager::update (float deltaTime, sf::IntRect screenInnerCollider) 
         
     if (this->invadersCollideWithBorders(screenInnerCollider)) {
         for (auto inv = this->invaders.begin(); inv != this->invaders.end(); ++inv) {
-            (*inv)->invertX();
-            (*inv)->moveDown();
+            //(*inv)->invertX();
+            //(*inv)->moveDown();
             (*inv)->update(deltaTime * 2, screenInnerCollider);
         }
     }
@@ -47,12 +47,12 @@ void InvadersManager::onTick () {
 
 void InvadersManager::draw (sf::RenderWindow* window) {
     for (auto it = this->invaders.begin(); it != this->invaders.end(); ++it)
-        (*it)->draw(this->window);
+        (*it)->draw(window);
 }
 
 void InvadersManager::deleteInvaders() {
     for (auto it = this->invaders.begin(); it != this->invaders.end(); ++it)
-        delete it;
+        delete *it;
 
     this->invaders.clear();
 }
@@ -68,7 +68,7 @@ bool InvadersManager::invadersCollideWithBorders(sf::IntRect screenInnerCollider
     return false;
 }
 
-std::vector<Invaders*>::iterator InvadersManager::collideWithInvaders(GameObject* gm) {
+std::vector<Invader*>::iterator InvadersManager::collideWithInvaders(GameObject* gm) {
     for (auto it = this->invaders.begin(); it != this->invaders.end(); ++it)
         if (gm->collideWith(*it))
             return it;
