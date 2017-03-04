@@ -4,8 +4,13 @@
 #include <vector>
 #include <SFML/Graphics.hpp>
 #include "../Utilities/Define.h"
+#include "../Utilities/Settings.h"
 #include "../Models/SpaceShip/SpaceShip.h"
 #include "../Models/SpaceShip/Invader.h"
+
+#define SPACE_BETWEEN_INV_X 35 
+#define SPACE_BETWEEN_INV_Y 40 
+#define INV_POS_Y 5
 
 class InvadersManager {
 public:
@@ -21,6 +26,8 @@ public:
 
 private:
     std::vector<Invader* > invaders;
+
+    void deleteInvaders();
 };
 
 #endif

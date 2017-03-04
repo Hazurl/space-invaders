@@ -2,10 +2,6 @@
 
 #include <iostream>
 
-#define SPACE_BETWEEN_INV_X 35 
-#define SPACE_BETWEEN_INV_Y 40 
-
-#define INV_POS_Y 5
 #define PLAYER_POS_Y_OFFSET 100
 
 Game::Game(sf::RenderWindow & window, unsigned int width, unsigned int height) :
