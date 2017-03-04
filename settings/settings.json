@@ -1,4 +1,10 @@
 {
+    "image_pattern" : {
+        "a" : "inv_a.bmp",
+        "b" : "inv_b.bmp",
+        "c" : "inv_c.bmp"
+    },
+
     "images" : {
         "bonus.bmp" : {
             "frame" : 1,
