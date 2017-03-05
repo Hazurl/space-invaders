@@ -38,7 +38,7 @@ void Environement::onTick () {
     this->invManager.onTick();
 }
 
-void Environement::draw (sf::RenderWindow* const window) {
+void Environement::draw (sf::RenderWindow const* window) {
     this->player->draw(window);
     this->invManager.draw(window);
 }

@@ -21,7 +21,7 @@ public:
     void                    update(long deltaTime);
     void                    onTick ();
 
-    void                    draw(sf::RenderWindow* const window);
+    void                    draw(sf::RenderWindow const* window);
 
 private:
     unsigned int            score = 0;
