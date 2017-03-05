@@ -3,7 +3,7 @@
 
 #include "SpaceShip.h"
 #include "../Bullet.h"
-#include "../../Game/Input.h"
+#include "../../Utilities/Input.h"
 #include <string>
 #include <SFML/Graphics.hpp>
 

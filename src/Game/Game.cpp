@@ -4,15 +4,23 @@
 
 #define PLAYER_POS_Y_OFFSET 100
 
-Game::Game(sf::RenderWindow & window, unsigned int width, unsigned int height) :
-    window(&window), width(width), height(height), state(State::MENU) {
+Game::Game() :
+    state(State::MENU) {
 
-    this->screenInnerCollider = sf::IntRect(0, 0, width, height);
+    this->window = sf::RenderWindow window (
+                       sf::VideoMode(WIDTH, HEIGHT),
+                       "Space Invaders", 
+                       sf::Style::Close | sf::Style::Titlebar
+                   );
+    this->window.setFramerateLimit(FPS);
+    this->clock = sf::Clock();
+
+    this->screenInnerCollider = sf::IntRect(0, 0, WIDTH, HEIGHT);
     this->invManager = InvadersManager();
 
     // Font
     if (!this->main_font.loadFromFile(FONT_PATH("pixelmix/pixelmix.ttf"))) {
-        std::cerr << "Impossible d'ouvrir la police principale" << std::endl;
+        std::cerr << "Impossible d'ouvrir la police d'ecriture principale" << std::endl;
         exit(1);
     }
 
@@ -22,40 +30,35 @@ Game::Game(sf::RenderWindow & window, unsigned int width, unsigned int height) :
                             this->height * 0.2);
 } 
 
-Game::~Game () {
-    if (this->player)
-        delete this->player;
-}
+Game::~Game () {}
 
-void Game::initialize () {
-    this->score = 0;
-    this->ticks = 0;
+void Game::Run () {
+    while (this->window.isOpen()) {
+        /* INPUT - EVENT */
+        sf::Event event;
+        while (this->window.pollEvent(event))
+            if (event.type == sf::Event::Closed)
+                window.close();
+        Input::get().updateButtons();
 
-    this->player = new Player("player_0.bmp", this->width / 2, this->height - PLAYER_POS_Y_OFFSET);
-    
-    this->invManager.Init(11, DEFAULT_INV_PATTERN);
+        /* UPDATE */
+        this->update((long)this->clock.restart().asMilliseconds() * SPEED);
+
+        /* DRAW */
+        window.clear();
+        this->draw();
+        window.display();
+    }
 }
 
 void Game::update(long deltaTime) {
     switch (this->state) {
         case State::PLAYING :
-
-        /* TICKS */
-            this->ticksDeltaTime += deltaTime;
-
-            if (this->ticksDeltaTime >= TICKS_TIME) {
-                ticksDeltaTime -= TICKS_TIME;
-                this->onTick();
-            }
-
         /* INPUT */
             if (Input::get().isJustPressed(Input::Button::pause))
                 this->setState(State::PAUSE);
 
-        /* UPDATE POSITION */
-            this->player->update(deltaTime, this->screenInnerCollider);
-            this->invManager.update(deltaTime, this->screenInnerCollider);
-
+            this->env.update(deltatTime);
         break;
 
         case State::PAUSE :
@@ -70,16 +73,10 @@ void Game::update(long deltaTime) {
     }
 }
 
-void Game::onTick () {
-    this->ticks++;
-    this->invManager.onTick();
-}
-
 void Game::draw () {
     switch (this->state) {
         case State::PLAYING :
-            this->player->draw(this->window);
-            this->invManager.draw(this->window);
+            this->env.draw(this->window);
         break;
 
         case State::PAUSE :
@@ -88,7 +85,7 @@ void Game::draw () {
             this->draw();
             this->state = State::PAUSE;
 
-            this->window->draw(
+            this->window.draw(
                 this->textPosition(
                     this->createText("PAUSE", 40),
                     0.5, 
@@ -98,9 +95,9 @@ void Game::draw () {
         break;
 
         case State::MENU :
-            this->window->draw(title);
+            this->window.draw(title);
 
-            this->window->draw(
+            this->window.draw(
                 this->textPosition(
                     this->createText("Press SPACE to start", 32),
                     0.5, 
@@ -113,7 +110,7 @@ void Game::draw () {
 
 void Game::setState(State st) {
     if (st == State::PLAYING && this->state == State::MENU) // passage du menu au jeu
-        this->initialize();
+        this->env.initialize();
 
     this->state = st;
 }

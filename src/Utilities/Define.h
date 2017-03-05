@@ -6,6 +6,8 @@
 #define WIDTH 500
 #define HEIGHT 600
 #define SPEED 1
+#define TICKS_TIME 500
+#define FPS 60
 
 #define DEFAULT_INV_PATTERN "abbcc" // pattern for invaders sprites
 // That means, there is one line of invaders A, 2 lines of invaders B, and 2 of invaders C
