@@ -12,6 +12,8 @@
 #define DEFAULT_INV_PATTERN "abbcc" // pattern for invaders sprites
 // That means, there is one line of invaders A, 2 lines of invaders B, and 2 of invaders C
 
+#define PLAYER_POS_Y_OFFSET 100
+
 #define IMAGE_PATH(x) "img/" x
 #define SETTINGS_PATH(x) "settings/" x
 #define FONT_PATH(x) "font/" x

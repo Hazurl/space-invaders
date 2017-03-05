@@ -14,17 +14,18 @@
 
 class Environement {
 public:
-                            Environement();
+                            Environement(sf::IntRect screenInnerCollider);
                             ~Environement();
     void                    initialize();
 
     void                    update(long deltaTime);
     void                    onTick ();
 
-    void                    draw();
+    void                    draw(sf::RenderWindow* const window);
 
 private:
     unsigned int            score = 0;
+    sf::IntRect             border;
     Player*                 player = nullptr;
     InvadersManager         invManager;
 

@@ -4,7 +4,7 @@
 
 int main()
 {
-    Game spaceInvader();
+    Game spaceInvader;
 
     spaceInvader.run();
 

@@ -10,26 +10,29 @@
 
 enum class State { PAUSE, PLAYING, MENU };
 
+class Environement;
+
 class Game {
 public:
     Game();
     ~Game();
 
     void setState(State st);
-    void Run ();
+    void run ();
 
 private:
+    void draw ();
+    void update(long deltaTime);
+
     sf::Text createText (std::string text, unsigned int size);
     sf::Text textPosition(sf::Text txt, float xCoef, float yCoef);
 
-    sf::RenderWindow window;
+    sf::RenderWindow* window = nullptr;
     sf::IntRect screenInnerCollider;
-    float width;
-    float height;
 
     sf::Clock clock;
 
-    Environement env;
+    Environement* env;
     
     State state;
 

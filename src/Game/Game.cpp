@@ -2,21 +2,16 @@
 
 #include <iostream>
 
-#define PLAYER_POS_Y_OFFSET 100
-
 Game::Game() :
-    state(State::MENU) {
+    screenInnerCollider(sf::IntRect(0, 0, WIDTH, HEIGHT)), env(new Environement(this->screenInnerCollider)), state(State::MENU) {
 
-    this->window = sf::RenderWindow window (
+    this->window = new sf::RenderWindow (
                        sf::VideoMode(WIDTH, HEIGHT),
                        "Space Invaders", 
                        sf::Style::Close | sf::Style::Titlebar
                    );
-    this->window.setFramerateLimit(FPS);
+    this->window->setFramerateLimit(FPS);
     this->clock = sf::Clock();
-
-    this->screenInnerCollider = sf::IntRect(0, 0, WIDTH, HEIGHT);
-    this->invManager = InvadersManager();
 
     // Font
     if (!this->main_font.loadFromFile(FONT_PATH("pixelmix/pixelmix.ttf"))) {
@@ -26,28 +21,31 @@ Game::Game() :
 
     // Sprite
     this->title.setTexture(Loader::get().getTexture(IMAGE_PATH("title.bmp")));
-    this->title.setPosition(this->width / 2 - this->title.getTextureRect().width / 2,
-                            this->height * 0.2);
+    this->title.setPosition(WIDTH / 2 - this->title.getTextureRect().width / 2,
+                            HEIGHT * 0.2);
 } 
 
-Game::~Game () {}
+Game::~Game () {
+    delete this->window;
+    delete this->env;
+}
 
-void Game::Run () {
-    while (this->window.isOpen()) {
+void Game::run () {
+    while (this->window->isOpen()) {
         /* INPUT - EVENT */
         sf::Event event;
-        while (this->window.pollEvent(event))
+        while (this->window->pollEvent(event))
             if (event.type == sf::Event::Closed)
-                window.close();
+                window->close();
         Input::get().updateButtons();
 
         /* UPDATE */
         this->update((long)this->clock.restart().asMilliseconds() * SPEED);
 
         /* DRAW */
-        window.clear();
+        window->clear();
         this->draw();
-        window.display();
+        window->display();
     }
 }
 
@@ -58,7 +56,7 @@ void Game::update(long deltaTime) {
             if (Input::get().isJustPressed(Input::Button::pause))
                 this->setState(State::PAUSE);
 
-            this->env.update(deltatTime);
+            this->env->update(deltaTime);
         break;
 
         case State::PAUSE :
@@ -76,7 +74,7 @@ void Game::update(long deltaTime) {
 void Game::draw () {
     switch (this->state) {
         case State::PLAYING :
-            this->env.draw(this->window);
+            this->env->draw(this->window);
         break;
 
         case State::PAUSE :
@@ -85,7 +83,7 @@ void Game::draw () {
             this->draw();
             this->state = State::PAUSE;
 
-            this->window.draw(
+            this->window->draw(
                 this->textPosition(
                     this->createText("PAUSE", 40),
                     0.5, 
@@ -95,9 +93,9 @@ void Game::draw () {
         break;
 
         case State::MENU :
-            this->window.draw(title);
+            this->window->draw(title);
 
-            this->window.draw(
+            this->window->draw(
                 this->textPosition(
                     this->createText("Press SPACE to start", 32),
                     0.5, 
@@ -110,7 +108,7 @@ void Game::draw () {
 
 void Game::setState(State st) {
     if (st == State::PLAYING && this->state == State::MENU) // passage du menu au jeu
-        this->env.initialize();
+        this->env->initialize();
 
     this->state = st;
 }
@@ -129,5 +127,5 @@ sf::Text Game::textPosition(sf::Text txt, float xCoef, float yCoef) {
     sf::FloatRect bounds = txt.getGlobalBounds();
     float w = bounds.width;
     float h = bounds.height;
-    txt.setPosition(this->width * xCoef - w / 2, this->height * yCoef - h / 2);
+    txt.setPosition(WIDTH * xCoef - w / 2, HEIGHT * yCoef - h / 2);
 }
