@@ -128,4 +128,6 @@ sf::Text Game::textPosition(sf::Text txt, float xCoef, float yCoef) {
     float w = bounds.width;
     float h = bounds.height;
     txt.setPosition(WIDTH * xCoef - w / 2, HEIGHT * yCoef - h / 2);
+
+    return txt;
 }

@@ -14,33 +14,33 @@ class Environement;
 
 class Game {
 public:
-    Game();
-    ~Game();
+                            Game();
+                            ~Game();
 
-    void setState(State st);
-    void run ();
+    void                    setState(State st);
+    void                    run ();
 
 private:
-    void draw ();
-    void update(long deltaTime);
+    void                    draw ();
+    void                    update(long deltaTime);
 
-    sf::Text createText (std::string text, unsigned int size);
-    sf::Text textPosition(sf::Text txt, float xCoef, float yCoef);
+    sf::Text                createText (std::string text, unsigned int size);
+    sf::Text                textPosition(sf::Text txt, float xCoef, float yCoef);
 
-    sf::RenderWindow* window = nullptr;
-    sf::IntRect screenInnerCollider;
+    sf::RenderWindow*       window = nullptr;
+    sf::IntRect             screenInnerCollider;
 
-    sf::Clock clock;
+    sf::Clock               clock;
 
-    Environement* env;
+    Environement*           env;
     
-    State state;
+    State                   state;
 
     // Font
-    sf::Font main_font; 
+    sf::Font                main_font; 
  
     // Sprite
-    sf::Sprite title;
+    sf::Sprite              title;
 };
 
 #endif
