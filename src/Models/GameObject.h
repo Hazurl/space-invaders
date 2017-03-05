@@ -18,7 +18,7 @@ public:
 /*              DRAW                                                            */
     void            setSpriteFromFile(std::string const& imgName);
     void            nextFrame();
-    void            draw (sf::RenderWindow* window);
+    virtual void    draw (sf::RenderWindow* window);
 
 /*              UPDATE                                                          */
     virtual void    update(float speed, sf::IntRect screenInnerCollider) = 0;

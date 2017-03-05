@@ -17,6 +17,7 @@ public:
 
 /*              UPDATE                                                          */
     void            update (float deltaTime, sf::IntRect screenInnerCollider);
+    virtual void    draw (sf::RenderWindow* window);
 
 /*              SETTER                                                          */
 

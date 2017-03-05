@@ -28,9 +28,9 @@ Bullet::~Bullet () {}
    ============================ 
 */
 
-void Bullet::update (float speed, sf::IntRect screenInnerCollider) {
+void Bullet::update (float deltaTime, sf::IntRect screenInnerCollider) {
     if (move_down)
-        this->collider.top += speed;
+        this->collider.top += deltaTime * this->speed;
     else
-        this->collider.top -= speed;
+        this->collider.top -= deltaTime * this->speed;
 }

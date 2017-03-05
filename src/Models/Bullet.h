@@ -22,6 +22,7 @@ public :
 
 private :
     bool move_down;
+    float speed = 1.0;
 };
 
 #endif

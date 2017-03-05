@@ -25,7 +25,7 @@ public :
 
     void update(long deltaTime);
     //void fire_invaders ();
-    void nextGameTick ();
+    void onTick ();
 
     void draw();
 
@@ -35,8 +35,10 @@ private :
     //bool invadersCollideWithBorders();
     //std::vector<SpaceShip*>::iterator collideWithInvaders(GameObject* gm);
     sf::Text createText (std::string text, unsigned int size);
+    sf::Text textPosition(sf::Text txt, float xCoef, float yCoef);
 
     sf::RenderWindow* window;
+    sf::IntRect screenInnerCollider;
     float width;
     float height;
 

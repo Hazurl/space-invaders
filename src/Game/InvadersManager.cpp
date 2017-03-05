@@ -38,6 +38,19 @@ void InvadersManager::update (float deltaTime, sf::IntRect screenInnerCollider) 
             (*inv)->update(deltaTime * 2, screenInnerCollider);
         }
     }
+/*
+    auto inv = this->collideWithInvaders();
+    if (inv != this->invaders.end()) {
+        delete playerBullet;
+        playerBullet = nullptr;
+
+        (*inv)->hit(1);
+        if ((*inv)->isDead()) {
+            delete *inv;
+            this->invaders.erase(inv);
+        }
+    }
+*/
 }
 
 void InvadersManager::onTick () {
